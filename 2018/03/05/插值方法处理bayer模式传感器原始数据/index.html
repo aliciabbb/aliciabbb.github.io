@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="基础," />
+  <meta name="keywords" content="计算机视觉,插值,原创," />
 
 
 
@@ -79,15 +79,18 @@
 
 
 
-<meta name="keywords" content="基础">
+<meta name="description" content="拜耳色彩滤波阵列（Bayer Color Filter Array）是非常有名的彩色图片的数字采集格式。色彩滤波器的模式如下图所示，由一半的G，1/4的R，1/4的B组成。原始采集的图像是单通道的灰度图像，放大会有较强的颗粒感。使用插值方法可以将其转化为彩色图像，并得到平滑的效果。 ![这里写图片描述](http://img.blog.csdn.net/20180307221759353?wate">
+<meta name="keywords" content="计算机视觉,插值,原创">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客名">
-<meta property="og:url" content="http://yoursite.com/2018/03/05/博客名/index.html">
+<meta property="og:title" content="插值方法处理bayer模式传感器原始数据">
+<meta property="og:url" content="http://yoursite.com/2018/03/05/插值方法处理bayer模式传感器原始数据/index.html">
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
+<meta property="og:description" content="拜耳色彩滤波阵列（Bayer Color Filter Array）是非常有名的彩色图片的数字采集格式。色彩滤波器的模式如下图所示，由一半的G，1/4的R，1/4的B组成。原始采集的图像是单通道的灰度图像，放大会有较强的颗粒感。使用插值方法可以将其转化为彩色图像，并得到平滑的效果。 ![这里写图片描述](http://img.blog.csdn.net/20180307221759353?wate">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-07T04:40:28.646Z">
+<meta property="og:updated_time" content="2018-03-07T06:45:43.959Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="博客名">
+<meta name="twitter:title" content="插值方法处理bayer模式传感器原始数据">
+<meta name="twitter:description" content="拜耳色彩滤波阵列（Bayer Color Filter Array）是非常有名的彩色图片的数字采集格式。色彩滤波器的模式如下图所示，由一半的G，1/4的R，1/4的B组成。原始采集的图像是单通道的灰度图像，放大会有较强的颗粒感。使用插值方法可以将其转化为彩色图像，并得到平滑的效果。 ![这里写图片描述](http://img.blog.csdn.net/20180307221759353?wate">
 
 
 
@@ -117,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/05/博客名/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/05/插值方法处理bayer模式传感器原始数据/"/>
 
 
 
 
 
-  <title>博客名 | Stay Hungry Stay foolish</title>
+  <title>插值方法处理bayer模式传感器原始数据 | Stay Hungry Stay foolish</title>
   
 
 
@@ -250,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/05/博客名/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/05/插值方法处理bayer模式传感器原始数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Heb">
@@ -267,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">博客名</h1>
+          <h1 class="post-title" itemprop="name headline">插值方法处理bayer模式传感器原始数据</h1>
         
 
         <div class="post-meta">
@@ -302,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
                   </a>
                 </span>
 
@@ -320,8 +323,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/05/博客名/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/05/博客名/" itemprop="commentsCount"></span>
+                <a href="/2018/03/05/插值方法处理bayer模式传感器原始数据/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/05/插值方法处理bayer模式传感器原始数据/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -354,7 +357,27 @@
       
 
       
-        
+        <pre><code>拜耳色彩滤波阵列（Bayer Color Filter Array）是非常有名的彩色图片的数字采集格式。色彩滤波器的模式如下图所示，由一半的G，1/4的R，1/4的B组成。原始采集的图像是单通道的灰度图像，放大会有较强的颗粒感。使用插值方法可以将其转化为彩色图像，并得到平滑的效果。
+![这里写图片描述](http://img.blog.csdn.net/20180307221759353?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYm9vbF9j/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+原始阵列中，每个点都代表采集的G、B或者R其中的一个值，所以需要插值估算另外两个分量。常用的插值方法为均值法。 
+#插值红蓝方法实现
+R和B通过线性领域插值，但这有四种不同的分布，如下图所示：
+![这里写图片描述](http://img.blog.csdn.net/20180307223025225?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYm9vbF9j/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+在（a）与（b）中，R和B分别取领域的平均值。
+#插值绿算法实现
+在（c）与（d）中，取领域的4个B或R的均值作为中间像素的B值。
+![这里写图片描述](http://img.blog.csdn.net/20180307223343786?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYm9vbF9j/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+由于人眼对绿光反应最敏感，对紫光和红光则反应较弱，因此为了达到更好的画质，需要对G特殊照顾。在上述（c）与（d）中，扩展开来就是上图的（e）与（f）中间像素G的取值，者也有一定的算法要求，不同的算法效果上会有差异。经过相关的研究，（e）（f）中间像素G值的算法如下：
+![这里写图片描述](http://img.blog.csdn.net/20180307223458685?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYm9vbF9j/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)![这里写图片描述](http://img.blog.csdn.net/20180307223529211?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYm9vbF9j/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+#源代码
+#include &quot;stdafx.h&quot;
+#include&lt;opencv2/opencv.hpp&gt;
+#include&lt;opencv2/highgui/highgui.hpp&gt;
+#include&lt;opencv2/imgproc/imgproc.hpp&gt;
+using namespace cv;
+</code></pre><p>int _tmain(int argc, _TCHAR<em> argv[])<br>{<br>    Mat lisa_gray,lisa_rgb,lisa_graycopy;<br>    lisa_gray = imread(“lisa_Bayer.bmp”, 2|4);<br>    lisa_graycopy = lisa_gray;<br>    //lisa_rgb.create(lisa_gray.rows, lisa_gray.cols, CV_8UC3);<br>    imshow(“gray”, lisa_gray);<br>    cvtColor(lisa_gray, lisa_rgb, CV_BayerGR2BGR);<br>    //Mat lisa_rgb = Mat::zeros(lisa_gray.rows, lisa_gray.cols, CV_8UC3);<br>    int row = lisa_graycopy.rows;<br>    int col = lisa_graycopy.cols;<br>    int colc = lisa_rgb.cols </em> lisa_rgb.channels();<br>    for (int i = 2; i &lt; row-2; i++)<br>    {<br>        uchar<em> data1 = lisa_gray.ptr<uchar>(i);<br>        uchar</uchar></em> data11 = lisa_gray.ptr<uchar>(i-1);<br>        uchar<em> data12 = lisa_gray.ptr<uchar>(i+1);<br>        uchar</uchar></em> data13 = lisa_gray.ptr<uchar>(i - 2);<br>        uchar<em> data14 = lisa_gray.ptr<uchar>(i + 2);<br>        uchar</uchar></em> data2 = lisa_rgb.ptr<uchar>(i);<br>        //uchar<em> data21 = lisa_rgb.ptr<uchar>(i-1);<br>        //uchar</uchar></em> data22 = lisa_rgb.ptr<uchar>(i+1);<br>        for (int j = 6; j &lt; colc-6; j++)<br>        {<br>            int k = (j+1) % 3;<br>            int m = (j+1) / 3 + 1;<br>            if (k == 0) m -= 1;<br>            if ((i + 1) % 2 == 1 &amp;&amp; m % 2 == 0 &amp;&amp; j%3 == 0) //奇数行、偶数列 G<br>            {<br>                m = m - 1;<br>                data2[j] = (data12[m] + data11[m]) / 2;<br>            }<br>            else if ((i + 1) % 2 == 1 &amp;&amp; m % 2 == 0 &amp;&amp; j % 3 == 1)<br>            {<br>                m = m - 1;<br>                data2[j] = data1[m];<br>            }<br>            else if ((i + 1) % 2 == 1 &amp;&amp; m % 2 == 0 &amp;&amp; j % 3 == 2)<br>            {<br>                m = m - 1;<br>                data2[j] = (data1[m + 1] + data1[m - 1]) / 2;<br>            }<br>            else if ((i + 1) % 2 == 1 &amp;&amp; m % 2 == 1 &amp;&amp; j % 3 == 0) //ji数行、ji数列 R<br>            {<br>                m = m - 1;<br>                data2[j] = (data12[m + 1] + data12[m - 1] + data11[m +1 ] + data11[m - 1]) / 4;<br>            }<br>            else if ((i + 1) % 2 == 1 &amp;&amp; m % 2 == 1 &amp;&amp; j % 3 == 1)<br>            {<br>                m = m - 1;<br>                //int m1 = abs(data13[m] - data14[m]);<br>                //int n1 = abs(data1[m - 2] - data1[m + 2]);<br>                //if (n1 &gt; m1) data2[j] = (data11[m] + data12[m]) / 2;<br>                //else if (n1 &lt; m1) data2[j] = (data11[m] + data1[m - 1]) / 2;<br>                data2[j] = (data1[m + 1] + data1[m - 1] + data11[m] + data12[m]) / 4;<br>            }<br>            else if ((i + 1) % 2 == 1 &amp;&amp; m % 2 == 1 &amp;&amp; j % 3 == 2)<br>            {<br>                m = m - 1;<br>                data2[j] = data1[m];<br>            }<br>            else if ((i + 1) % 2 == 0 &amp;&amp; m % 2 == 1 &amp;&amp; j % 3 == 0) //偶数行、奇数列 G<br>            {<br>                m = m - 1;<br>                data2[j] = (data1[m + 1] + data1[m - 1]) / 2;<br>            }<br>            else if ((i + 1) % 2 == 0 &amp;&amp; m % 2 == 1 &amp;&amp; j % 3 == 1)<br>            {<br>                m = m - 1;<br>                data2[j] = data1[m];<br>            }<br>            else if ((i + 1) % 2 == 0 &amp;&amp; m % 2 == 1 &amp;&amp; j % 3 == 2)<br>            {<br>                m = m - 1;<br>                data2[j] = (data12[m] + data11[m]) / 2;<br>            }<br>            else if ((i + 1) % 2 == 0 &amp;&amp; m % 2 == 0 &amp;&amp; j % 3 == 0) //o数行、o数列 B<br>            {<br>                m = m - 1;<br>                data2[j] = data12[m];<br>            }<br>            else if ((i + 1) % 2 == 0 &amp;&amp; m % 2 == 0 &amp;&amp; j % 3 == 1)<br>            {<br>                m = m - 1;<br>                //int m11 = abs(data13[m] - data14[m]);<br>                //int n11 = abs(data1[m - 2] - data1[m + 2]);<br>                //if (n11 &gt; m11) data2[j] = (data11[m] + data12[m]) / 2;<br>                //else if (n11 &lt; m11) data2[j] = (data11[m] + data1[m - 1]) / 2;<br>                 data2[j] = (data1[m + 1] + data1[m - 1] + data11[m] + data12[m]) / 4;<br>            }<br>            else if ((i + 1) % 2 == 0 &amp;&amp; m % 2 == 0 &amp;&amp; j % 3 == 2)<br>            {<br>                m = m - 1;<br>                data2[j] = (data12[m + 1] + data12[m - 1] + data11[m + 1] + data11[m - 1]) / 4;<br>            }<br>        }<br>    }<br>    imshow(“color”, lisa_rgb);<br>    imwrite(“my.jpg”, lisa_rgb);<br>    std::cout &lt;&lt; col &lt;&lt; std::endl;<br>    waitKey(0);<br>    return 0;<br>}</uchar></uchar></uchar></uchar></p>
+<pre><code>注意：不同的CCD可能阵列排列方式不同，自己要根据实际情况做出修改
+</code></pre>
       
     </div>
     
@@ -400,7 +423,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/基础/" rel="tag"># 基础</a>
+            <a href="/tags/计算机视觉/" rel="tag"># 计算机视觉</a>
+          
+            <a href="/tags/插值/" rel="tag"># 插值</a>
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
           
         </div>
       
@@ -413,15 +440,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/05/插值方法处理bayer模式传感器原始数据/" rel="next" title="插值方法处理bayer模式传感器原始数据">
-                <i class="fa fa-chevron-left"></i> 插值方法处理bayer模式传感器原始数据
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/05/博客名/" rel="prev" title="博客名">
+                博客名 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>

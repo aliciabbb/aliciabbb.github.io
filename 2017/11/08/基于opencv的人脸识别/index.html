@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机视觉,人脸识别，opencv," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基于opencv的人脸检测​        在数字图像处理课的作业上，老师要求做出一个简单的项目要求可以对人脸进行分类和识别。由于刚接触opencv不久，所以想通过opencv自带的机器学习算法实现。以前只用opencv做过简单的人脸检测，二值化等基本的图像处理。所以这次的小项目也参考了不少网上的优秀博客，感谢大佬们的分享。在这里我对自己的一些思路做了一些整理，希望对大家有帮助。以下的内容将分为三">
+<meta name="keywords" content="计算机视觉,人脸识别，opencv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于opencv的人脸识别检测">
+<meta property="og:url" content="http://yoursite.com/2017/11/08/基于opencv的人脸识别/index.html">
+<meta property="og:site_name" content="Stay Hungry Stay foolish">
+<meta property="og:description" content="基于opencv的人脸检测​        在数字图像处理课的作业上，老师要求做出一个简单的项目要求可以对人脸进行分类和识别。由于刚接触opencv不久，所以想通过opencv自带的机器学习算法实现。以前只用opencv做过简单的人脸检测，二值化等基本的图像处理。所以这次的小项目也参考了不少网上的优秀博客，感谢大佬们的分享。在这里我对自己的一些思路做了一些整理，希望对大家有帮助。以下的内容将分为三">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/opencvface/1.png">
+<meta property="og:image" content="http://yoursite.com/images/opencvface/2.png">
+<meta property="og:image" content="http://yoursite.com/images/opencvface/3.png">
+<meta property="og:image" content="http://yoursite.com/images/opencvface/4.png">
+<meta property="og:updated_time" content="2018-03-10T05:48:39.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于opencv的人脸识别检测">
+<meta name="twitter:description" content="基于opencv的人脸检测​        在数字图像处理课的作业上，老师要求做出一个简单的项目要求可以对人脸进行分类和识别。由于刚接触opencv不久，所以想通过opencv自带的机器学习算法实现。以前只用opencv做过简单的人脸检测，二值化等基本的图像处理。所以这次的小项目也参考了不少网上的优秀博客，感谢大佬们的分享。在这里我对自己的一些思路做了一些整理，希望对大家有帮助。以下的内容将分为三">
+<meta name="twitter:image" content="http://yoursite.com/images/opencvface/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/08/基于opencv的人脸识别/"/>
+
+
+
+
+
+  <title>基于opencv的人脸识别检测 | Stay Hungry Stay foolish</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stay Hungry Stay foolish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/08/基于opencv的人脸识别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Heb">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stay Hungry Stay foolish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于opencv的人脸识别检测</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T22:37:16+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/08/基于opencv的人脸识别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/11/08/基于opencv的人脸识别/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基于opencv的人脸检测"><a href="#基于opencv的人脸检测" class="headerlink" title="基于opencv的人脸检测"></a>基于opencv的人脸检测</h1><p>​        在数字图像处理课的作业上，老师要求做出一个简单的项目要求可以对人脸进行分类和识别。由于刚接触opencv不久，所以想通过opencv自带的机器学习算法实现。以前只用opencv做过简单的人脸检测，二值化等基本的图像处理。所以这次的小项目也参考了不少网上的优秀博客，感谢大佬们的分享。在这里我对自己的一些思路做了一些整理，希望对大家有帮助。以下的内容将分为三个模块进行，分别是数据集整理过程、调用opencv的训练过程和最后的检测标记及分类过程。</p>
+<h2 id="一、数据集的准备"><a href="#一、数据集的准备" class="headerlink" title="一、数据集的准备"></a>一、数据集的准备</h2><p>​       无论是机器学习还是深度学习，数据集的准备都必不可少，好的数据集可以节省大量的时间成本。好在opencv提供了现有的数据集，即</p>
+<p>。40个人，每人10张照片。照片在不同时间、不同光照、不同表情(睁眼闭眼、笑或者不笑)、不同人脸细节(戴眼镜或者不戴眼镜)下采集。所有的图像都在一个黑暗均匀的背景下采集的，正面竖直人脸(有些有有轻微旋转)。解压后如下图：</p>
+<p><center><img src="/images/opencvface/1.png" alt="Alt text"></center></p>
+<p>​        仅有下载的人脸数据集还是不够的，我的目的是训练自己及其他人的人脸，并进行分类标记。所以还拍了自己的照片、从网上获取了习大大、胡大大和江大大的照片，和上面下载的数据集中的随便的几个一起组成了一个新的数据集（由于数据集照片数量限制，数据集里人数越少，识别正确率越高）。当然很重要的一点，就是要对新的下载的数据集进行预处理。整个过程实现的思路如下：</p>
+<ol>
+<li>遍历存取照片的文件夹，读取照片</li>
+<li>对读取的照片进行人脸检测，并用矩形标记</li>
+<li>提取出人脸，灰度化处理，改变为和下载数据集一致的大小，存到特定文件夹</li>
+</ol>
+<p>我自己的数据集如下图所示，其他类似：</p>
+<p><center><img src="/images/opencvface/2.png" alt="Alt text"></center></p>
+<p>源代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;stdafx.h&quot;</span><br><span class="line"></span><br><span class="line">#define _CRT_SECURE_NO_DEPRECATE  </span><br><span class="line">#define _CRT_SECURE_NO_WARNINGS </span><br><span class="line">#include &lt;cstdio&gt;  </span><br><span class="line">#include &lt;vector&gt;  </span><br><span class="line">#include &lt;iostream&gt;  </span><br><span class="line">#include &lt;fstream&gt;  </span><br><span class="line">#include &lt;cstring&gt;  </span><br><span class="line">#include &lt;cstdlib&gt;  </span><br><span class="line">#include &lt;cmath&gt;  </span><br><span class="line">#include &lt;algorithm&gt; </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#pragma warning(disable:4996)</span><br><span class="line">#include &quot;opencv\cv.h&quot;  </span><br><span class="line">#include &quot;opencv2\core\core.hpp&quot;  </span><br><span class="line">#include &quot;opencv2\highgui\highgui.hpp&quot;  </span><br><span class="line">#include &quot;opencv2\imgproc\imgproc.hpp&quot;  </span><br><span class="line">#include &quot;opencv2\contrib\contrib.hpp&quot;  </span><br><span class="line">#include &quot;opencv2\objdetect\objdetect.hpp&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">using namespace cv;</span><br><span class="line"></span><br><span class="line">string face_cascade_name = &quot;haarcascade_frontalface_alt.xml&quot;;</span><br><span class="line">CascadeClassifier face_cascade;//用于检测人脸的分类器</span><br><span class="line">string window_name = &quot;人脸识别&quot;;</span><br><span class="line">void detectAndDisplay(Mat frame);</span><br><span class="line"></span><br><span class="line">int main(int argc, char** argv)</span><br><span class="line">&#123;</span><br><span class="line">	string dir_path = &quot;E:/testmyphoto/&quot;;</span><br><span class="line">	Directory dir;</span><br><span class="line">	vector&lt;string&gt; fileNames = dir.GetListFiles(dir_path, &quot;*.jpg&quot;, false);</span><br><span class="line"></span><br><span class="line">	for (int i = 0; i &lt; fileNames.size(); i++)</span><br><span class="line">	&#123;</span><br><span class="line">		string fileName = fileNames[i];</span><br><span class="line">		string fileFullName = dir_path + fileName;</span><br><span class="line">		cout &lt;&lt; &quot;file name:&quot; &lt;&lt; fileName &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; &quot;file paht:&quot; &lt;&lt; fileFullName &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">		//Image processing  </span><br><span class="line">		Mat pScr;</span><br><span class="line">		pScr = imread(fileFullName); //以文件名命名窗口</span><br><span class="line">		if (!face_cascade.load(face_cascade_name))&#123;</span><br><span class="line">			printf(&quot;[error] 无法加载级联分类器文件！\n&quot;);</span><br><span class="line">			return -1;</span><br><span class="line">		&#125;</span><br><span class="line">		detectAndDisplay(pScr);</span><br><span class="line"></span><br><span class="line">		//namedWindow(fileName, 0);</span><br><span class="line">		//imshow(fileName, pScr);</span><br><span class="line">		//imshow(fileName, pScr);</span><br><span class="line">		waitKey(1000);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	//system(&quot;pause&quot;);  </span><br><span class="line">	return EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int j = 0;</span><br><span class="line">void detectAndDisplay(Mat frame)&#123;</span><br><span class="line">	std::vector&lt;Rect&gt; faces;</span><br><span class="line">	Mat frame_gray;</span><br><span class="line">	cvtColor(frame, frame_gray, CV_BGR2GRAY);</span><br><span class="line">	equalizeHist(frame_gray, frame_gray);</span><br><span class="line"></span><br><span class="line">	face_cascade.detectMultiScale(frame_gray, faces, 1.1, 3, 0 | CV_HAAR_SCALE_IMAGE, Size(40, 30));</span><br><span class="line"></span><br><span class="line">	for (int i = 0; i &lt; faces.size(); i++)&#123;</span><br><span class="line">		//Point center(faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5);</span><br><span class="line">		//ellipse(frame, center, Size(faces[i].width*0.43, faces[i].height*0.6), 0, 0, 360, Scalar(0, 0, 0), 4, 8, 0);//椭圆标记</span><br><span class="line">        rectangle(frame, cvPoint(faces[i].x, faces[i].y), cvPoint(faces[i].x + faces[i].width, faces[i].y + faces[i].height), Scalar(0, 0, 255), 1, 1, 0);</span><br><span class="line"></span><br><span class="line">		int width = faces[i].width;</span><br><span class="line">		int height = faces[i].width;</span><br><span class="line">		Mat aaa;//直接矩形框出的人脸</span><br><span class="line">		Mat bbb;//统一大小后的人脸</span><br><span class="line">		Mat ccc;//gray</span><br><span class="line">		aaa = frame(Rect(faces[i].x ,faces[i].y, width, height));</span><br><span class="line">		resize(aaa, bbb, Size(92,112), 0,0,INTER_LINEAR);</span><br><span class="line">		cvtColor(bbb, ccc, CV_BGR2GRAY);</span><br><span class="line">		namedWindow(&quot;dst&quot;);</span><br><span class="line">		imshow(&quot;dst&quot;,aaa);</span><br><span class="line">		</span><br><span class="line">		string testimgofat = &quot;E:/ha/&quot; + to_string(j) + &quot;.jpg&quot;;</span><br><span class="line">		imwrite(testimgofat, ccc);</span><br><span class="line">		j++;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(window_name, frame);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、对数据集进行训练"><a href="#二、对数据集进行训练" class="headerlink" title="二、对数据集进行训练"></a>二、对数据集进行训练</h2><p>​         在对人脸模型进行训练的时候，需要对人脸和人脸的标签进行读取，如果直接在数据库中进行读取的话，会使代码效率低效，所以提前准备Txt文件存储人脸的路径和分类，方便程序中的读取。Txt文件内容如下：</p>
+<p><center><img src="/images/opencvface/3.png" alt="Alt text"></center></p>
+<p>很显然，前面是图片的路径，后面是自己打得标签，标签可以自定义，只是在最后判断的时候用。至于如何打标签，建议用python自动生成，手动打标签费时费力不讨好。</p>
+<p>​        带有路径和标签的txt文件生成后，建议放到工程目录里，方便读取。接下来就是激动人心的训练了，其实训练过程很简单，毕竟强大的opencv给了现有的分类器和算法，直接调用即可，网上有很多关于分类器和算法的介绍，这里不再赘述。代码的整理思路如下：</p>
+<ol>
+<li>通过之前准备的Txt文件读取图像和图像对应的标签</li>
+<li>用两个容器来存放图像对应的数据和标签</li>
+<li>通过opencv提供的人脸识别算法对人脸模型进行训练，保存分类器文件</li>
+</ol>
+<p>话不多说，你们想要的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;stdafx.h&quot;</span><br><span class="line"></span><br><span class="line">#include &lt;opencv2/opencv.hpp&gt;  </span><br><span class="line">#include &lt;iostream&gt;  </span><br><span class="line">#include &lt;fstream&gt;  </span><br><span class="line">#include &lt;sstream&gt;  </span><br><span class="line">#include &lt;math.h&gt;  </span><br><span class="line"></span><br><span class="line">using namespace cv;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">static Mat norm_0_255(InputArray _src) &#123;</span><br><span class="line">	Mat src = _src.getMat();</span><br><span class="line">	// 创建和返回一个归一化后的图像矩阵:  </span><br><span class="line">	Mat dst;</span><br><span class="line">	switch (src.channels()) &#123;</span><br><span class="line">	case1:</span><br><span class="line">		cv::normalize(_src, dst, 0, 255, NORM_MINMAX, CV_8UC1);</span><br><span class="line">		break;</span><br><span class="line">	case3:</span><br><span class="line">		cv::normalize(_src, dst, 0, 255, NORM_MINMAX, CV_8UC3);</span><br><span class="line">		break;</span><br><span class="line">	default:</span><br><span class="line">		src.copyTo(dst);</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line">	return dst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用CSV文件去读图像和标签，主要使用stringstream和getline方法  </span><br><span class="line">static void read_csv(const string&amp; filename, vector&lt;Mat&gt;&amp; images, vector&lt;int&gt;&amp; labels, char separator = &apos;;&apos;) &#123;</span><br><span class="line">	std::ifstream file(filename.c_str(), ifstream::in);</span><br><span class="line">	if (!file) &#123;</span><br><span class="line">		string error_message = &quot;No valid input file was given, please check the given filename.&quot;;</span><br><span class="line">		CV_Error(CV_StsBadArg, error_message);</span><br><span class="line">	&#125;</span><br><span class="line">	string line, path, classlabel;</span><br><span class="line">	while (getline(file, line)) &#123;</span><br><span class="line">		stringstream liness(line);</span><br><span class="line">		getline(liness, path, separator);</span><br><span class="line">		getline(liness, classlabel);</span><br><span class="line">		if (!path.empty() &amp;&amp; !classlabel.empty()) &#123;</span><br><span class="line">			images.push_back(imread(path, 0));</span><br><span class="line">			labels.push_back(atoi(classlabel.c_str()));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//CascadeClassifier cas(&quot;haarcascade_frontalface_default.xml&quot;);</span><br><span class="line">	//读取你的CSV文件路径.  </span><br><span class="line">	//string fn_csv = string(argv[1]);  </span><br><span class="line">	string fn_csv = &quot;at.txt&quot;;</span><br><span class="line"></span><br><span class="line">	// 2个容器来存放图像数据和对应的标签  </span><br><span class="line">	vector&lt;Mat&gt; images;</span><br><span class="line">	vector&lt;int&gt; labels;</span><br><span class="line">	// 读取数据. 如果文件不合法就会出错  </span><br><span class="line">	// 输入的文件名已经有了.  </span><br><span class="line">	try</span><br><span class="line">	&#123;</span><br><span class="line">		read_csv(fn_csv, images, labels);</span><br><span class="line">	&#125;</span><br><span class="line">	catch (cv::Exception&amp; e)</span><br><span class="line">	&#123;</span><br><span class="line">		cerr &lt;&lt; &quot;Error opening file \&quot;&quot; &lt;&lt; fn_csv &lt;&lt; &quot;\&quot;. Reason: &quot; &lt;&lt; e.msg &lt;&lt; endl;</span><br><span class="line">		// 文件有问题，我们啥也做不了了，退出了  </span><br><span class="line">		exit(1);</span><br><span class="line">	&#125;</span><br><span class="line">	// 如果没有读取到足够图片，也退出.  </span><br><span class="line">	if (images.size() &lt;= 1) &#123;</span><br><span class="line">		string error_message = &quot;This demo needs at least 2 images to work. Please add more images to your data set!&quot;;</span><br><span class="line">		CV_Error(CV_StsError, error_message);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 下面的几行代码仅仅是从你的数据集中移除最后一张图片  </span><br><span class="line">	//[gm:自然这里需要根据自己的需要修改，他这里简化了很多问题]  </span><br><span class="line">	Mat testSample = images[images.size() - 1];//imread(&quot;3.jpg&quot;,1);//</span><br><span class="line">	int testLabel = labels[labels.size() - 1];</span><br><span class="line">	images.pop_back();</span><br><span class="line">	labels.pop_back();</span><br><span class="line">	// 下面几行创建了一个特征脸模型用于人脸识别，  </span><br><span class="line">	// 通过CSV文件读取的图像和标签训练它。  </span><br><span class="line">	// T这里是一个完整的PCA变换  </span><br><span class="line">	//如果你只想保留10个主成分，使用如下代码  </span><br><span class="line">	//      cv::createEigenFaceRecognizer(10);  </span><br><span class="line">	//  </span><br><span class="line">	// 如果你还希望使用置信度阈值来初始化，使用以下语句：  </span><br><span class="line">	//      cv::createEigenFaceRecognizer(10, 123.0);  </span><br><span class="line">	//  </span><br><span class="line">	// 如果你使用所有特征并且使用一个阈值，使用以下语句：  </span><br><span class="line">	//      cv::createEigenFaceRecognizer(0, 123.0);  </span><br><span class="line"></span><br><span class="line">	Ptr&lt;FaceRecognizer&gt; model = createEigenFaceRecognizer();</span><br><span class="line">	model-&gt;train(images, labels);</span><br><span class="line">	model-&gt;save(&quot;MyFacePCAModel.xml&quot;);</span><br><span class="line"></span><br><span class="line">	/*Ptr&lt;FaceRecognizer&gt; model1 = createFisherFaceRecognizer();</span><br><span class="line">	model1-&gt;train(images, labels);</span><br><span class="line">	model1-&gt;save(&quot;MyFaceFisherModel.xml&quot;);*/</span><br><span class="line"></span><br><span class="line">	/*Ptr&lt;FaceRecognizer&gt; model2 = createLBPHFaceRecognizer();</span><br><span class="line">	model2-&gt;train(images, labels);</span><br><span class="line">	model2-&gt;save(&quot;MyFaceLBPHModel.xml&quot;);*/</span><br><span class="line"></span><br><span class="line">	// 下面对测试图像进行预测，predictedLabel是预测标签结果  </span><br><span class="line">	int predictedLabel = model-&gt;predict(testSample);</span><br><span class="line">	//int predictedLabel1 = model1-&gt;predict(testSample);</span><br><span class="line">	//int predictedLabel2 = model2-&gt;predict(testSample);</span><br><span class="line"></span><br><span class="line">	// 还有一种调用方式，可以获取结果同时得到阈值:  </span><br><span class="line">	//      int predictedLabel = -1;  </span><br><span class="line">	//      double confidence = 0.0;  </span><br><span class="line">	//      model-&gt;predict(testSample, predictedLabel, confidence);  </span><br><span class="line"></span><br><span class="line">	string result_message = format(&quot;Predicted class = %d / Actual class = %d.&quot;, predictedLabel, testLabel);</span><br><span class="line">	//string result_message1 = format(&quot;Predicted class = %d / Actual class = %d.&quot;, predictedLabel1, testLabel);</span><br><span class="line">	//string result_message2 = format(&quot;Predicted class = %d / Actual class = %d.&quot;, predictedLabel2, testLabel);</span><br><span class="line">	cout &lt;&lt; result_message &lt;&lt; endl;</span><br><span class="line">	//cout &lt;&lt; result_message1 &lt;&lt; endl;</span><br><span class="line">	//cout &lt;&lt; result_message2 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行完代码后，发现工程目录里已经生成了训练好的model，即MyFacePCAModel.xml。接下来你们应该猜到要做什么了，就是在新建的工程里调用自己生成的模型。还是建议把已经生成的模型复制到下一个检测工程的工程目录里，方便使用。</p>
+<h2 id="三、人脸检测和分类"><a href="#三、人脸检测和分类" class="headerlink" title="三、人脸检测和分类"></a>三、人脸检测和分类</h2><p>​         这部分的主要目的是识别几个关键人物的照片，并相应的把照片移到与其对应的文件夹中。这里需要用到我们的测试集了。我在网上下载了一些各位大大们的照片，也把我的新照片跟那些放在了同一个文件夹里。接下来要做的就是，识别这个文件夹里的照片人物并进行分类，由于是各位大大们的照片，所以就不展示了，你们脑补一下就好了。当然也可以调用笔记本的摄像头实现实时检测，想怎么玩怎么玩，接下来思路如下：</p>
+<ol>
+<li>用同样的遍历方法读取测试文件夹中的图片</li>
+<li>对每次读取到的图片进行人脸检测，并进行大小和灰度处理</li>
+<li>调用自己的分类器对处理完的照片进行分类，并标记姓名，然后存储到相应的文件夹</li>
+</ol>
+<p>源代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;stdafx.h&quot;</span><br><span class="line">#include&lt;opencv2\opencv.hpp&gt;  </span><br><span class="line">#include&lt;iostream&gt;  </span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">using namespace cv;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	VideoCapture cap(0);    </span><br><span class="line">	if (!cap.isOpened())</span><br><span class="line">	&#123;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	Mat frame;</span><br><span class="line">	Mat edges;</span><br><span class="line">	Mat gray;</span><br><span class="line"></span><br><span class="line">	CascadeClassifier cascade;</span><br><span class="line">	bool stop = false;</span><br><span class="line">	//训练好的文件名称，放置在可执行文件同目录下  </span><br><span class="line">	cascade.load(&quot;haarcascade_frontalface_alt.xml&quot;);</span><br><span class="line"></span><br><span class="line">	Ptr&lt;FaceRecognizer&gt; modelPCA = createEigenFaceRecognizer();</span><br><span class="line">	modelPCA-&gt;load(&quot;MyFacePCAModel.xml&quot;);</span><br><span class="line"></span><br><span class="line">	while (!stop)</span><br><span class="line">	&#123;</span><br><span class="line">		//frame=imread(&quot;127.jpg&quot;);</span><br><span class="line">		cap &gt;&gt; frame;</span><br><span class="line">		//建立用于存放人脸的向量容器  </span><br><span class="line">		vector&lt;Rect&gt; faces(0);</span><br><span class="line"></span><br><span class="line">		cvtColor(frame, gray, CV_BGR2GRAY);</span><br><span class="line">		//改变图像大小，使用双线性差值  </span><br><span class="line">		//resize(gray, smallImg, smallImg.size(), 0, 0, INTER_LINEAR);  </span><br><span class="line">		//变换后的图像进行直方图均值化处理  </span><br><span class="line">		equalizeHist(gray, gray);</span><br><span class="line"></span><br><span class="line">		cascade.detectMultiScale(gray, faces,</span><br><span class="line">			1.1, 3, 0</span><br><span class="line">			//|CV_HAAR_FIND_BIGGEST_OBJECT  </span><br><span class="line">			//|CV_HAAR_DO_ROUGH_SEARCH  </span><br><span class="line">			| CV_HAAR_SCALE_IMAGE,</span><br><span class="line">			Size(30, 30));</span><br><span class="line"></span><br><span class="line">		Mat face;</span><br><span class="line">		Point text_lb;</span><br><span class="line"></span><br><span class="line">		for (size_t i = 0; i &lt; faces.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int predictPCA = 0;</span><br><span class="line">			if (faces[i].height &gt; 10 &amp;&amp; faces[i].width &gt; 10)</span><br><span class="line">			&#123;</span><br><span class="line">				face = gray(faces[i]);</span><br><span class="line">				text_lb = Point(faces[i].x, faces[i].y);</span><br><span class="line"></span><br><span class="line">				rectangle(frame, faces[i], Scalar(255, 0, 0), 1, 8, 0);</span><br><span class="line">				</span><br><span class="line">				Mat face_test;</span><br><span class="line">               </span><br><span class="line">                resize(face, face_test, Size(92, 112));</span><br><span class="line"></span><br><span class="line">				if (!face_test.empty())</span><br><span class="line">				&#123;</span><br><span class="line">					//测试图像应该是灰度图  </span><br><span class="line">					predictPCA = modelPCA-&gt;predict(face_test);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				//cout &lt;&lt; predictPCA &lt;&lt; endl;</span><br><span class="line">				if (predictPCA == 15)</span><br><span class="line">				&#123;</span><br><span class="line">					string name = &quot;liyanlin&quot;;</span><br><span class="line">					putText(frame, name, text_lb, FONT_HERSHEY_COMPLEX, 1, Scalar(0, 0, 255));</span><br><span class="line">					predictPCA = 0;</span><br><span class="line">				&#125;</span><br><span class="line">				if (predictPCA == 16)</span><br><span class="line">				&#123;</span><br><span class="line">					string name = &quot;xidada&quot;;</span><br><span class="line">					putText(frame, name, text_lb, FONT_HERSHEY_COMPLEX, 1, Scalar(0, 0, 255));</span><br><span class="line">					predictPCA = 0;</span><br><span class="line">				&#125;</span><br><span class="line">				if (predictPCA == 17)</span><br><span class="line">				&#123;</span><br><span class="line">					string name = &quot;shuai&quot;;</span><br><span class="line">					putText(frame, name, text_lb, FONT_HERSHEY_COMPLEX, 1, Scalar(0, 0, 255));</span><br><span class="line">					predictPCA = 0;</span><br><span class="line">				&#125;</span><br><span class="line">				if (predictPCA == 18)</span><br><span class="line">				&#123;</span><br><span class="line">					string name = &quot;pu&quot;;</span><br><span class="line">					putText(frame, name, text_lb, FONT_HERSHEY_COMPLEX, 1, Scalar(0, 0, 255));</span><br><span class="line">					predictPCA = 0;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">		//Mat face_test_gray;  </span><br><span class="line">		//cvtColor(face_test, face_test_gray, CV_BGR2GRAY);  </span><br><span class="line"></span><br><span class="line">		imshow(&quot;face&quot;, frame);</span><br><span class="line">		if (waitKey(50) &gt;= 0)</span><br><span class="line">			stop = true;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后看看我调用摄像头的识别吧：</p>
+<p><center><img src="/images/opencvface/4.png" alt="Alt text"></center></p>
+<p>over！欢迎交流！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="John Heb 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="John Heb 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机视觉/" rel="tag"># 计算机视觉</a>
+          
+            <a href="/tags/人脸识别，opencv/" rel="tag"># 人脸识别，opencv</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/08/插值法将bayer原始数据转换为彩色图像/" rel="prev" title="插值法将bayer原始数据转换为彩色图像">
+                插值法将bayer原始数据转换为彩色图像 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="John Heb" />
+            
+              <p class="site-author-name" itemprop="name">John Heb</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于opencv的人脸检测"><span class="nav-number">1.</span> <span class="nav-text">基于opencv的人脸检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、数据集的准备"><span class="nav-number">1.1.</span> <span class="nav-text">一、数据集的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、对数据集进行训练"><span class="nav-number">1.2.</span> <span class="nav-text">二、对数据集进行训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、人脸检测和分类"><span class="nav-number">1.3.</span> <span class="nav-text">三、人脸检测和分类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Heb</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Views
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'aliciabbb',
+            repo: 'gitment-comment# MUST HAVE, The repo you use to store Gitment comments',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '68e9dc4b6035c5b9c6f594248ebeefb5bef1dbdb',
+            
+                client_id: '404f156cc099a34e63a6'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/images/1111.jpg">
 <meta property="og:image" content="http://yoursite.com/images/2222.jpg">
 <meta property="og:image" content="http://yoursite.com/images/3333.jpg">
-<meta property="og:updated_time" content="2018-03-08T01:25:57.304Z">
+<meta property="og:updated_time" content="2018-03-10T06:13:57.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插值法将bayer原始数据转换为彩色图像">
 <meta name="twitter:description" content="插值法将bayer原始数据转换为彩色图像@()[数字图像|计算机视觉] bayer阵列介绍&amp;emsp;&amp;emsp;bayer 图像是相机内部的原始图片，一般为.raw的格式。bayer 又称拜耳阵列，被广泛用于数字图像中。&amp;emsp;&amp;emsp;对于彩色图像，需要采集多种最基本的颜色，如rgb三种颜色，最简单的方法就是用滤镜的方法，红色的滤镜透过红色的波长，绿色的滤镜透过绿色的波长，蓝色的滤镜透过">
@@ -367,7 +367,7 @@
         <h1 id="插值法将bayer原始数据转换为彩色图像"><a href="#插值法将bayer原始数据转换为彩色图像" class="headerlink" title="插值法将bayer原始数据转换为彩色图像"></a>插值法将bayer原始数据转换为彩色图像</h1><p>@()[数字图像|计算机视觉]</p>
 <h2 id="bayer阵列介绍"><a href="#bayer阵列介绍" class="headerlink" title="bayer阵列介绍"></a>bayer阵列介绍</h2><p>&emsp;&emsp;<strong>bayer</strong> 图像是相机内部的原始图片，一般为.raw的格式。<strong>bayer</strong> 又称拜耳阵列，被广泛用于数字图像中。<br>&emsp;&emsp;对于彩色图像，需要采集多种最基本的颜色，如rgb三种颜色，最简单的方法就是用滤镜的方法，红色的滤镜透过红色的波长，绿色的滤镜透过绿色的波长，蓝色的滤镜透过蓝色的波长。如果要采集rgb三个基本色，则需要三块滤镜，这样价格昂贵，且不好制造，因为三块滤镜都必须保证每一个像素点都对齐。当用bayer格式的时候，很好的解决了这个问题。bayer 格式图片在一块滤镜上设置的不同的颜色，通过分析人眼对颜色的感知发现，人眼对绿色比较敏感，所以一般bayer格式的图片绿色格式的像素是是r和g像素的和。<br>&emsp;&emsp;另外，如下图，为bayer色彩滤波阵列，由一半的G，1/4的R，1/4的B组成。</p>
 <p><center><img src="/images/1.png" alt="Alt text"></center></p>
-<script type="math/tex; mode=display">\frac{1}{3}= \frac{\dfrac{1}{2} +\frac{1}{4}+\frac{1}{4}}{1+1+1}</script><h2 id="插值红蓝方法实现"><a href="#插值红蓝方法实现" class="headerlink" title="插值红蓝方法实现"></a>插值红蓝方法实现</h2><p>&emsp;&emsp;每一个像素仅仅包括了光谱的一部分，必须通过插值来实现每个像素的RGB值。为了从Bayer格式得到每个像素的RGB格式，我们需要通过插值填补缺失的2个色彩。插值的方法有很多（包括领域、线性、3*3等），速度与质量权衡，最好的线性插值补偿算法。R和B通过线性领域插值，但这有四种不同的分布，如下图所示，在（a）与（b）中，R和B分别取领域的平均值。</p>
+<script type="math/tex; mode=display">\frac{1}{3}= \frac{\frac{1}{2} +\frac{1}{4}+\frac{1}{4}}{1+1+1}</script><h2 id="插值红蓝方法实现"><a href="#插值红蓝方法实现" class="headerlink" title="插值红蓝方法实现"></a>插值红蓝方法实现</h2><p>&emsp;&emsp;每一个像素仅仅包括了光谱的一部分，必须通过插值来实现每个像素的RGB值。为了从Bayer格式得到每个像素的RGB格式，我们需要通过插值填补缺失的2个色彩。插值的方法有很多（包括领域、线性、3*3等），速度与质量权衡，最好的线性插值补偿算法。R和B通过线性领域插值，但这有四种不同的分布，如下图所示，在（a）与（b）中，R和B分别取领域的平均值。</p>
 <p><center><img src="/images/12.png" alt="Alt text"></center></p>
 <h2 id="插值绿方法实现"><a href="#插值绿方法实现" class="headerlink" title="插值绿方法实现"></a>插值绿方法实现</h2><p>&emsp;&emsp;在（c）与（d）中，取领域的4个B或R的均值作为中间像素的B值。由于人眼对绿光反应最敏感，对紫光和红光则反应较弱，因此为了达到更好的画质，需要对G特殊照顾。在上述（c）与（d）中，扩展开来就是下图的（e）与（f）中间像素G的取值，者也有一定的算法要求，不同的算法效果上会有差异。</p>
 <p><center><img src="/images/15204679091.png" alt="Alt text"></center></p>
@@ -560,7 +560,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

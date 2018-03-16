@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/images/opencvface/2.png">
 <meta property="og:image" content="http://yoursite.com/images/opencvface/3.png">
 <meta property="og:image" content="http://yoursite.com/images/opencvface/4.png">
-<meta property="og:updated_time" content="2018-03-10T06:13:52.225Z">
+<meta property="og:updated_time" content="2018-03-16T00:22:18.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于opencv的人脸识别检测">
 <meta name="twitter:description" content="基于opencv的人脸检测​&amp;emsp;&amp;emsp;在数字图像处理课的作业上，老师要求做出一个简单的项目要求可以对人脸进行分类和识别。由于刚接触opencv不久，所以想通过opencv自带的机器学习算法实现。以前只用opencv做过简单的人脸检测，二值化等基本的图像处理。所以这次的小项目也参考了不少网上的优秀博客，感谢大佬们的分享。在这里我对自己的一些思路做了一些整理，希望对大家有帮助。以下的内容">
@@ -362,7 +362,7 @@
       
 
       
-        <h1 id="基于opencv的人脸检测"><a href="#基于opencv的人脸检测" class="headerlink" title="基于opencv的人脸检测"></a>基于opencv的人脸检测</h1><p>​&emsp;&emsp;在数字图像处理课的作业上，老师要求做出一个简单的项目要求可以对人脸进行分类和识别。由于刚接触opencv不久，所以想通过opencv自带的机器学习算法实现。以前只用opencv做过简单的人脸检测，二值化等基本的图像处理。所以这次的小项目也参考了不少网上的优秀博客，感谢大佬们的分享。在这里我对自己的一些思路做了一些整理，希望对大家有帮助。以下的内容将分为三个模块进行，分别是数据集整理过程、调用opencv的训练过程和最后的检测标记及分类过程。</p>
+        <h1 id="基于opencv的人脸检测"><a href="#基于opencv的人脸检测" class="headerlink" title="基于opencv的人脸检测"></a>基于opencv的人脸检测</h1><p>​&emsp;&emsp;在数字图像处理课的作业上，老师要求做出一个简单的项目要求可以对人脸进行分类和识别。由于刚接触opencv不久，所以想通过opencv自带的机器学习算法实现。以前只用opencv做过简单的人脸检测，二值化等基本的图像处理。所以这次的小项目也参考了不少网上的优秀博客，感谢大佬们的分享。在这里我对自己的一些思路做了一些整理，希望对大家有帮助。以下的内容将分为三个模块进行，分别是数据集整理过程、调用opencv的训练过程和最后的检测标记及分类过程。<br>&emsp;&emsp;通过OpenCv进行性别识别的基本工具是FaceRecognizer。这是OpenCv2.x版本中的一个基本的人脸识别类，它封装了三种基本但也是经典的人脸识别算法：基于PCA变换的人脸识别(EigenFaceRecognizer)、基于Fisher变换的人脸识别(FisherFaceRecognizer)、基于局部二值模式的人脸识别(LBPHFaceRecognizer)。这些算法差不多都是十年以前的人脸识别方法了，因此在今天看来正确率应该不会太让人满意，不过我们这里重在实践，而非算法研究，因此我们不会在算法创新方面下太多功夫，所以选择了这三个基本的识别算法。</p>
 <h2 id="一、数据集的准备"><a href="#一、数据集的准备" class="headerlink" title="一、数据集的准备"></a>一、数据集的准备</h2><p>​&emsp;&emsp;无论是机器学习还是深度学习，数据集的准备都必不可少，好的数据集可以节省大量的时间成本。好在opencv提供了现有的数据集，即 <a href="http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html" target="_blank" rel="noopener">ORL人脸数据库</a>。40个人，每人10张照片。照片在不同时间、不同光照、不同表情(睁眼闭眼、笑或者不笑)、不同人脸细节(戴眼镜或者不戴眼镜)下采集。所有的图像都在一个黑暗均匀的背景下采集的，正面竖直人脸(有些有有轻微旋转)。解压后如下图：</p>
 <p><center><img src="/images/opencvface/1.png" alt="Alt text"></center></p>
 <p>​&emsp;&emsp;仅有下载的人脸数据集还是不够的，我的目的是训练自己及其他人的人脸，并进行分类标记。所以还拍了自己的照片、从网上获取了习大大、胡大大和江大大的照片，和上面下载的数据集中的随便的几个一起组成了一个新的数据集（由于数据集照片数量限制，数据集里人数越少，识别正确率越高）。当然很重要的一点，就是要对新的下载的数据集进行预处理。整个过程实现的思路如下：</p>
@@ -461,6 +461,10 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/09/ubuntu16.04配置opencv+anaconda+tensorflow/" rel="next" title="ubuntu16.04配置opencv+anaconda+tensorflow">
+                <i class="fa fa-chevron-left"></i> ubuntu16.04配置opencv+anaconda+tensorflow
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -557,7 +561,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -568,7 +572,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -579,7 +583,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

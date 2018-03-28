@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tensorflow,opencv,anaconda,深度学习," />
+  <meta name="keywords" content="linux,树莓派,交叉编译," />
 
 
 
@@ -79,18 +79,28 @@
 
 
 
-<meta name="description" content="ubuntu16.04配置opencv+anaconda+tensorflow注意：本台主机已经配置好cuda8.0和cudnn5.1 opencv3.2.0的安装一 、安装依赖项$ sudo apt-get install build-essential$ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev">
-<meta name="keywords" content="tensorflow,opencv,anaconda,深度学习">
+<meta name="description" content="构建交叉平台开发环境刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。 主要实现以下目标  充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。 能够建立主机与目标机之间传递数据的基本方法。 能够下载安装Linux及相关工具到目标机。 学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。  内容包括以下部分  针对所选">
+<meta name="keywords" content="linux,树莓派,交叉编译">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu16.04配置opencv+anaconda+tensorflow">
-<meta property="og:url" content="http://yoursite.com/2017/10/09/ubuntu16.04配置opencv+anaconda+tensorflow/index.html">
+<meta property="og:title" content="构建交叉平台开发环境">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/构建交叉平台开发环境/index.html">
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
-<meta property="og:description" content="ubuntu16.04配置opencv+anaconda+tensorflow注意：本台主机已经配置好cuda8.0和cudnn5.1 opencv3.2.0的安装一 、安装依赖项$ sudo apt-get install build-essential$ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev">
+<meta property="og:description" content="构建交叉平台开发环境刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。 主要实现以下目标  充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。 能够建立主机与目标机之间传递数据的基本方法。 能够下载安装Linux及相关工具到目标机。 学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。  内容包括以下部分  针对所选">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-16T06:40:20.068Z">
+<meta property="og:image" content="http://yoursite.com/images/pi1/11.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/7.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/8.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/9.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/6.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/2.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/10.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/5.png">
+<meta property="og:image" content="http://yoursite.com/images/pi1/4.png">
+<meta property="og:updated_time" content="2018-03-28T05:58:31.019Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu16.04配置opencv+anaconda+tensorflow">
-<meta name="twitter:description" content="ubuntu16.04配置opencv+anaconda+tensorflow注意：本台主机已经配置好cuda8.0和cudnn5.1 opencv3.2.0的安装一 、安装依赖项$ sudo apt-get install build-essential$ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev">
+<meta name="twitter:title" content="构建交叉平台开发环境">
+<meta name="twitter:description" content="构建交叉平台开发环境刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。 主要实现以下目标  充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。 能够建立主机与目标机之间传递数据的基本方法。 能够下载安装Linux及相关工具到目标机。 学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。  内容包括以下部分  针对所选">
+<meta name="twitter:image" content="http://yoursite.com/images/pi1/11.png">
 
 
 
@@ -120,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/09/ubuntu16.04配置opencv+anaconda+tensorflow/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/构建交叉平台开发环境/"/>
 
 
 
 
 
-  <title>ubuntu16.04配置opencv+anaconda+tensorflow | Stay Hungry Stay foolish</title>
+  <title>构建交叉平台开发环境 | Stay Hungry Stay foolish</title>
   
 
 
@@ -253,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/ubuntu16.04配置opencv+anaconda+tensorflow/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/构建交叉平台开发环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Heb">
@@ -270,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ubuntu16.04配置opencv+anaconda+tensorflow</h1>
+          <h1 class="post-title" itemprop="name headline">构建交叉平台开发环境</h1>
         
 
         <div class="post-meta">
@@ -282,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T23:37:16+08:00">
-                2017-10-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T22:31:20+08:00">
+                2018-03-28
               </time>
             
 
@@ -305,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
+                  <a href="/categories/Linux学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux学习</span>
                   </a>
                 </span>
 
@@ -323,8 +333,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/09/ubuntu16.04配置opencv+anaconda+tensorflow/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/10/09/ubuntu16.04配置opencv+anaconda+tensorflow/" itemprop="commentsCount"></span>
+                <a href="/2018/03/28/构建交叉平台开发环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/28/构建交叉平台开发环境/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -357,32 +367,60 @@
       
 
       
-        <h1 id="ubuntu16-04配置opencv-anaconda-tensorflow"><a href="#ubuntu16-04配置opencv-anaconda-tensorflow" class="headerlink" title="ubuntu16.04配置opencv+anaconda+tensorflow"></a>ubuntu16.04配置opencv+anaconda+tensorflow</h1><p><strong>注意：本台主机已经配置好cuda8.0和cudnn5.1</strong></p>
-<h2 id="opencv3-2-0的安装"><a href="#opencv3-2-0的安装" class="headerlink" title="opencv3.2.0的安装"></a>opencv3.2.0的安装</h2><h3 id="一-、安装依赖项"><a href="#一-、安装依赖项" class="headerlink" title="一 、安装依赖项"></a>一 、安装依赖项</h3><p><code>$ sudo apt-get install build-essential</code><br><code>$ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</code><br><code>$ sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev # 处理图像所需的包</code><br><code>$ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev liblapacke-dev</code><br><code>$ sudo apt-get install libxvidcore-dev libx264-dev # 处理视频所需的包</code><br><code>$ sudo apt-get install libatlas-base-dev gfortran # 优化opencv功能</code><br><code>$ sudo apt-get install ffmpeg</code></p>
-<h3 id="二-、解压下载好的压缩包"><a href="#二-、解压下载好的压缩包" class="headerlink" title="二 、解压下载好的压缩包"></a>二 、解压下载好的压缩包</h3><p> 执行以下指令<br><code>$ cd opencv-3.2.0</code><br><code>$ mkdir build</code><br><code>$ cd build</code><br><code>$ cmake -D CMAKE_BUILD_TYPE=build -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.2.0/modules -D WITH_CUDA=ON -D WITH_CUBLAS=ON -D DCUDA_NVCC_FLAGS=&quot;-D_FORCE_INLINES&quot; -D CUDA_ARCH_BIN=&quot;8.0&quot; -D CUDA_ARCH_PTX=&quot;&quot; -D CUDA_FAST_MATH=ON -D WITH_GTK=ON -D PYTHON_EXCUTABLE=/usr/local/lib/python -D CUDA_GENERATION=Kepler ..</code><br><code>$ make -j8</code><br><code>$ sudo make install</code><br><code>$ sudo /bin/bash -c &#39;echo &quot;/home/fanzong/anaconda2/envs/tensorflow/lib&quot; &gt; /etc/ld.so.conf.d/opencv.conf&#39;</code><br><code>$ sudo ldconfig</code></p>
-<p>PYTHON_EXCUTABLE：指定python路径<br>OPENCV_EXTRA_MODULES_PATH: 指定opencv所需模块的路径，就是之前我们所说的contrib</p>
-<p><strong>坑1：python导入cv2 出现如下错误：</strong><br>Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>ImportError: /usr/local/lib/libopencv_freetype.so.3.2: undefined symbol: hb_shape</module></stdin></p>
-<p><strong>解决1：</strong></p>
-<p><code>~/opencv-3.2.0/build$ sed -i &#39;s/​${freetype2_LIBRARIES} ${harfbuzz_LIBRARIES}/​${FREETYPE_LIBRARIES} ${HARFBUZZ_LIBRARIES}/g&#39;</code> </p>
-<p><code>~/opencv_contrib-3.2.0/modules/freetype/CMakeLists.txt</code>  </p>
-<p>然后重新编译！！！</p>
-<p>坑2：要根据是否有gpu来配置make变量，上面是有gpu版本的</p>
-<h2 id="anaconda的安装"><a href="#anaconda的安装" class="headerlink" title="anaconda的安装"></a>anaconda的安装</h2><h3 id="一、下载安装包"><a href="#一、下载安装包" class="headerlink" title="一、下载安装包"></a>一、下载安装包</h3><p>地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/要根据自己想使用的python版本下载。" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/要根据自己想使用的python版本下载。</a></p>
-<p>鄙人选择了此版本 Anaconda2-5.1.0-linux-x86_64.sh</p>
-<h3 id="二、安装anaconda"><a href="#二、安装anaconda" class="headerlink" title="二、安装anaconda"></a>二、安装anaconda</h3><p>进入上面下载的脚本目录文件，运行脚本即可。</p>
-<p>全程只需要点yes和回车。</p>
-<h3 id="三、配置环境变量"><a href="#三、配置环境变量" class="headerlink" title="三、配置环境变量"></a>三、配置环境变量</h3><p><code>sudo gedit  ~/.bashrc</code></p>
-<p>打开后，在最后一行加上：export PATH=”/home/username/anaconda2/bin:$PATH”</p>
-<p>四、重启系统</p>
-<h2 id="tensorflow的安装"><a href="#tensorflow的安装" class="headerlink" title="tensorflow的安装"></a>tensorflow的安装</h2><h3 id="一、添加anaconda的TUNA镜像"><a href="#一、添加anaconda的TUNA镜像" class="headerlink" title="一、添加anaconda的TUNA镜像"></a>一、添加anaconda的TUNA镜像</h3><p><code>conda config -add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code></p>
-<h3 id="二、建立一个conda计算机环境"><a href="#二、建立一个conda计算机环境" class="headerlink" title="二、建立一个conda计算机环境"></a>二、建立一个conda计算机环境</h3><p><code>conda create -n tensorflow python=2.7</code></p>
-<h3 id="三、激活环境并使用conda安装tensorflow"><a href="#三、激活环境并使用conda安装tensorflow" class="headerlink" title="三、激活环境并使用conda安装tensorflow"></a>三、激活环境并使用conda安装tensorflow</h3><p><code>source activate tensorflow</code></p>
-<p><code>pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.0rc0-cp27-none-linux_x86_64.whl</code></p>
-<p>大坑：执行第三步的时候一直出现各种各样的错误，一直找不到解决方案。但是过了一晚上就好了，猜测是网速原因。</p>
-<p>安装成功后，在终端输入python，然后import cv2失败，因为装了anaconda，所以会失败，这时执行：</p>
-<p><code>pip install opencv-python</code> </p>
-<p>即可。</p>
-<p>想要测试tensorflow，则需要在激活的conda环境中测试。</p>
+        <h1 id="构建交叉平台开发环境"><a href="#构建交叉平台开发环境" class="headerlink" title="构建交叉平台开发环境"></a>构建交叉平台开发环境</h1><p>刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。</p>
+<p><strong>主要实现以下目标</strong></p>
+<ul>
+<li>充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。</li>
+<li>能够建立主机与目标机之间传递数据的基本方法。</li>
+<li>能够下载安装Linux及相关工具到目标机。</li>
+<li>学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。</li>
+</ul>
+<p><strong>内容包括以下部分</strong></p>
+<ul>
+<li>针对所选择的目标平台(树莓派), 简要介绍其：执行环境（硬件环境）、运行环境（软件环境）和编程环境（编程工具）。</li>
+<li>下载安装Linux (bootloader、内核、模块、库、文件系统等) 到开发板。</li>
+<li>建立host-target连接 (常见SSH, VNC, Putty等)。</li>
+<li>构建并测试开发板交叉编译器。</li>
+</ul>
+<h2 id="安装树莓派系统"><a href="#安装树莓派系统" class="headerlink" title="安装树莓派系统"></a>安装树莓派系统</h2><p>这一步比较简单，我是从华硕tinkerboard官网下载的系统，将下载的文件解压后，通过Win32diskimager软件将系统刻录至TF卡即可，注意路径不要搞错。最后将TF卡插入树莓派，连接显示屏开机。本板子的初试账户密码为：linaro</p>
+<h2 id="查看树莓派的IP地址"><a href="#查看树莓派的IP地址" class="headerlink" title="查看树莓派的IP地址"></a>查看树莓派的IP地址</h2><p>有两种方式可以和PC机相连，一种是网线的方式，另一种是无线的方式，值得注意的是，两种方法的IP地址不一样。</p>
+<p>1、树莓派连接显示屏开机后，执行sudo ifconfig命令，得到如下：</p>
+<p><center> <img src="/images/pi1/11.png" alt="Alt text"></center></p>
+<p>inet后面的即为无线的ip地址（不同的板子可能不一样）。</p>
+<p>2、通过网线查询板子的IP地址。将网线和PC端、树莓派端连接起来，然后点开右上角的网络连接。</p>
+<p><center> <img src="/images/pi1/7.png" alt="Alt text"></center></p>
+<p>点开编辑，对IPV4进行如下设置</p>
+<p><center> <img src="/images/pi1/8.png" alt="Alt text"></center></p>
+<p>通过右上角的网络信息，查看ipv4的IP地址</p>
+<p><center> <img src="/images/pi1/9.png" alt="Alt text"></center></p>
+<p>然后执行如下指令</p>
+<p><center> <img src="/images/pi1/6.png" alt="Alt text"></center></p>
+<p>10.42.0.98即为ip地址。</p>
+<h2 id="在Ubuntu下安装交叉编译工具"><a href="#在Ubuntu下安装交叉编译工具" class="headerlink" title="在Ubuntu下安装交叉编译工具"></a>在Ubuntu下安装交叉编译工具</h2><p>1、安装下载工具</p>
+<p><code>sudo apt-get install git</code><br><code>mkdir raspberrypi</code></p>
+<p>2、安装交叉编译工具</p>
+<p><code>cd raspberrypi</code><br><code>git clone git://github.com/raspberrypi/tools.git</code></p>
+<p>3、配置环境变量</p>
+<p>打开./bashrc文件，加入：<br><code>Export PATH=$PATH:$HOME/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux- gnueabihf-raspbian-x86/bin</code></p>
+<p>如果是32位机，则去掉-x86。注意文件夹位置要对应，这里的tools安装在了raspberrypi文件夹里。</p>
+<p>4、检测是否安装成功</p>
+<p><code>arm</code></p>
+<p><center> <img src="/images/pi1/2.png" alt="Alt text"></center></p>
+<h2 id="用交叉编译工具在ubuntu下编译写好的c文件"><a href="#用交叉编译工具在ubuntu下编译写好的c文件" class="headerlink" title="用交叉编译工具在ubuntu下编译写好的c文件"></a>用交叉编译工具在ubuntu下编译写好的c文件</h2><p>新建一个文件夹，pitest，然后在文件夹里面建一个pitest.c，将例程写到文件里。</p>
+<p><code>cd pitest</code></p>
+<p><code>arm-linux-gnueabihf-gcc pitest.c -o pitest -lm</code></p>
+<p>不报错，即可生成pitest.o文件，这个就是后面要在树莓派里运行的文件。</p>
+<h2 id="在ubuntu下通过SSH连接树莓派"><a href="#在ubuntu下通过SSH连接树莓派" class="headerlink" title="在ubuntu下通过SSH连接树莓派"></a>在ubuntu下通过SSH连接树莓派</h2><p>在上面步骤中，我们介绍了两种获取ip地址的方法，通过ssh和ip就可以和树莓派建立连接了。下面是在不接网线的情况下，接网线的情况换下IP即可。</p>
+<p><center> <img src="/images/pi1/10.png" alt="Alt text"></center></p>
+<h2 id="将ubuntu下编译好的文件传入到树莓派"><a href="#将ubuntu下编译好的文件传入到树莓派" class="headerlink" title="将ubuntu下编译好的文件传入到树莓派"></a>将ubuntu下编译好的文件传入到树莓派</h2><p>这里用到的是filezilla工具</p>
+<p><code>sudo apt-get  install filezilla</code></p>
+<p>安装完毕后打开，出现如下界面</p>
+<p><center> <img src="/images/pi1/5.png" alt="Alt text"></center></p>
+<p>上面对应输入自己的ip，用户名和密码即可快速连接。左边对应的是本地目录，右边对应的是树莓派的目录。</p>
+<p>上一步已经进入到了树莓派的终端，所以下一步可以建立一个文件夹，重启filezila，将编译好的两个文件上传到树莓派新建的文件夹里。</p>
+<p>最后在树莓派终端中，执行程序</p>
+<p><code>./pitest</code></p>
+<p><center> <img src="/images/pi1/4.png" alt="Alt text"></center></p>
 
       
     </div>
@@ -429,13 +467,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
-            <a href="/tags/opencv/" rel="tag"># opencv</a>
+            <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
           
-            <a href="/tags/anaconda/" rel="tag"># anaconda</a>
-          
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+            <a href="/tags/交叉编译/" rel="tag"># 交叉编译</a>
           
         </div>
       
@@ -448,15 +484,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/03/13/代码工程管理工具-make/" rel="next" title="代码工程管理工具-make">
+                <i class="fa fa-chevron-left"></i> 代码工程管理工具-make
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/03/关于网络结构中Inception结构的理解/" rel="prev" title="Inception结构的理解">
-                Inception结构的理解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -599,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu16-04配置opencv-anaconda-tensorflow"><span class="nav-number">1.</span> <span class="nav-text">ubuntu16.04配置opencv+anaconda+tensorflow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#opencv3-2-0的安装"><span class="nav-number">1.1.</span> <span class="nav-text">opencv3.2.0的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-、安装依赖项"><span class="nav-number">1.1.1.</span> <span class="nav-text">一 、安装依赖项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-、解压下载好的压缩包"><span class="nav-number">1.1.2.</span> <span class="nav-text">二 、解压下载好的压缩包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#anaconda的安装"><span class="nav-number">1.2.</span> <span class="nav-text">anaconda的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、下载安装包"><span class="nav-number">1.2.1.</span> <span class="nav-text">一、下载安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、安装anaconda"><span class="nav-number">1.2.2.</span> <span class="nav-text">二、安装anaconda</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、配置环境变量"><span class="nav-number">1.2.3.</span> <span class="nav-text">三、配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow的安装"><span class="nav-number">1.3.</span> <span class="nav-text">tensorflow的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、添加anaconda的TUNA镜像"><span class="nav-number">1.3.1.</span> <span class="nav-text">一、添加anaconda的TUNA镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、建立一个conda计算机环境"><span class="nav-number">1.3.2.</span> <span class="nav-text">二、建立一个conda计算机环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、激活环境并使用conda安装tensorflow"><span class="nav-number">1.3.3.</span> <span class="nav-text">三、激活环境并使用conda安装tensorflow</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构建交叉平台开发环境"><span class="nav-number">1.</span> <span class="nav-text">构建交叉平台开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装树莓派系统"><span class="nav-number">1.1.</span> <span class="nav-text">安装树莓派系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看树莓派的IP地址"><span class="nav-number">1.2.</span> <span class="nav-text">查看树莓派的IP地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Ubuntu下安装交叉编译工具"><span class="nav-number">1.3.</span> <span class="nav-text">在Ubuntu下安装交叉编译工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用交叉编译工具在ubuntu下编译写好的c文件"><span class="nav-number">1.4.</span> <span class="nav-text">用交叉编译工具在ubuntu下编译写好的c文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在ubuntu下通过SSH连接树莓派"><span class="nav-number">1.5.</span> <span class="nav-text">在ubuntu下通过SSH连接树莓派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将ubuntu下编译好的文件传入到树莓派"><span class="nav-number">1.6.</span> <span class="nav-text">将ubuntu下编译好的文件传入到树莓派</span></a></li></ol></li></ol></div>
             
 
           </div>

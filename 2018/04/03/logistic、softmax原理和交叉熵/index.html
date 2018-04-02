@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux,gcc," />
+  <meta name="keywords" content="深度学习,交叉熵," />
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="Linux学习之gccgcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。 语法 gcc(选项)(参数) 选项 -o：指定生成的输出文件；-E：仅执行编译预处理；-S：将C代码转换为汇编代码；-wall">
-<meta name="keywords" content="Linux,gcc">
+<meta name="description" content="logistic、softmax原理和交叉熵深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。  logistic回归（是非问题）中，y取0或者1； softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；  Logist">
+<meta name="keywords" content="深度学习,交叉熵">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux学习之gcc">
-<meta property="og:url" content="http://yoursite.com/2018/03/11/Linux学习之gcc/index.html">
+<meta property="og:title" content="logistic、softmax原理和交叉熵">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/logistic、softmax原理和交叉熵/index.html">
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
-<meta property="og:description" content="Linux学习之gccgcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。 语法 gcc(选项)(参数) 选项 -o：指定生成的输出文件；-E：仅执行编译预处理；-S：将C代码转换为汇编代码；-wall">
+<meta property="og:description" content="logistic、softmax原理和交叉熵深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。  logistic回归（是非问题）中，y取0或者1； softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；  Logist">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-11T05:07:58.563Z">
+<meta property="og:image" content="http://yoursite.com/images/nnet1/1.png">
+<meta property="og:image" content="http://yoursite.com/images/nnet1/2.png">
+<meta property="og:updated_time" content="2018-04-02T23:18:54.149Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux学习之gcc">
-<meta name="twitter:description" content="Linux学习之gccgcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。 语法 gcc(选项)(参数) 选项 -o：指定生成的输出文件；-E：仅执行编译预处理；-S：将C代码转换为汇编代码；-wall">
+<meta name="twitter:title" content="logistic、softmax原理和交叉熵">
+<meta name="twitter:description" content="logistic、softmax原理和交叉熵深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。  logistic回归（是非问题）中，y取0或者1； softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；  Logist">
+<meta name="twitter:image" content="http://yoursite.com/images/nnet1/1.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/11/Linux学习之gcc/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/logistic、softmax原理和交叉熵/"/>
 
 
 
 
 
-  <title>Linux学习之gcc | Stay Hungry Stay foolish</title>
+  <title>logistic、softmax原理和交叉熵 | Stay Hungry Stay foolish</title>
   
 
 
@@ -253,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/11/Linux学习之gcc/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/logistic、softmax原理和交叉熵/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Heb">
@@ -270,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux学习之gcc</h1>
+          <h1 class="post-title" itemprop="name headline">logistic、softmax原理和交叉熵</h1>
         
 
         <div class="post-meta">
@@ -282,8 +285,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-11T21:06:16+08:00">
-                2018-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T14:18:20+08:00">
+                2018-04-03
               </time>
             
 
@@ -305,8 +308,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux学习/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux学习</span>
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -323,8 +326,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/11/Linux学习之gcc/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/11/Linux学习之gcc/" itemprop="commentsCount"></span>
+                <a href="/2018/04/03/logistic、softmax原理和交叉熵/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/03/logistic、softmax原理和交叉熵/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -357,37 +360,23 @@
       
 
       
-        <h1 id="Linux学习之gcc"><a href="#Linux学习之gcc" class="headerlink" title="Linux学习之gcc"></a>Linux学习之gcc</h1><p>gcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。</p>
-<p><em>语法</em></p>
-<p><code>gcc(选项)(参数)</code></p>
-<p><em>选项</em></p>
-<p><code>-o：指定生成的输出文件；</code><br><code>-E：仅执行编译预处理；</code><br><code>-S：将C代码转换为汇编代码；</code><br><code>-wall：显示警告信息；</code><br><code>-c：仅执行编译操作，不进行连接操作。</code></p>
-<p><em>参数</em></p>
-<p>C源文件：指定C语言源代码文件。</p>
-<p><em>例子</em></p>
-<p>假设源程序文件名为test.c</p>
-<p><strong>无选项编译链接</strong></p>
-<p><code>gcc test.c</code></p>
-<p>将test.c预处理、汇编、编译并链接形成可执行文件。这里未指定输出文件，默认输出为a.out。</p>
-<p><strong>选项 -o</strong></p>
-<p><code>gcc test.c -o test</code><br>将test.c预处理、汇编、编译并链接形成可执行文件test。-o选项用来指定输出文件的文件名。</p>
-<p><strong>选项 -E</strong></p>
-<p><code>gcc -E test.c -o test.i</code><br>将test.c预处理输出test.i文件。</p>
-<p><strong>选项 -S</strong></p>
-<p><code>gcc -S test.i</code><br>将预处理输出文件test.i汇编成test.s文件。</p>
-<p><strong>选项 -c</strong></p>
-<p><code>gcc -c test.s</code><br>将汇编输出文件test.s编译输出test.o文件。</p>
-<p><strong>无选项链接</strong></p>
-<p>gcc test.o -o test<br>将编译输出文件test.o链接成最终可执行文件test。</p>
-<p><strong>选项 -O</strong></p>
-<p><code>gcc -O1 test.c -o test</code><br>使用编译优化级别1编译程序。级别为1~3，级别越大优化效果越好，但编译时间越长。</p>
-<p><strong>多源文件的编译方法</strong></p>
-<p>如果有多个源文件，基本上有两种编译方法：</p>
-<p>假设有两个源文件为test.c和testfun.c</p>
-<p><strong>多个文件一起编译</strong></p>
-<p><code>gcc testfun.c test.c -o test</code><br>将testfun.c和test.c分别编译后链接成test可执行文件。</p>
-<p><strong>分别编译各个源文件，之后对编译后输出的目标文件链接。</strong></p>
-<p><code>gcc -c testfun.c    #将testfun.c编译成testfun.o</code><br><code>gcc -c test.c       #将test.c编译成test.o</code><br><code>gcc -o testfun.o test.o -o test    #将testfun.o和test.o链接成test</code><br>以上两种方法相比较，第一中方法编译时需要所有文件重新编译，而第二种方法可以只重新编译修改的文件，未修改的文件不用重新编译。</p>
+        <h1 id="logistic、softmax原理和交叉熵"><a href="#logistic、softmax原理和交叉熵" class="headerlink" title="logistic、softmax原理和交叉熵"></a>logistic、softmax原理和交叉熵</h1><p>深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。</p>
+<ul>
+<li>logistic回归（是非问题）中，y取0或者1；</li>
+<li>softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；</li>
+</ul>
+<h2 id="Logistic回归"><a href="#Logistic回归" class="headerlink" title="Logistic回归"></a>Logistic回归</h2><p>Logistic回归为概率型非线性回归模型，是研究二分类观察结果与一些影响因素之间关系的一种多变量分析方法。通常的问题是，研究某些因素条件下某个结果是否发生，比如医学中根据病人的一些症状来判断它是否患有某种病。</p>
+<p>在讲解Logistic回归理论之前，我们先从LR分类器说起。LR分类器，即Logistic Regression Classifier。在分类情形下，经过学习后的LR分类器是一组权值，当测试样本的数据输入时，这组权值与测试数据按照线性加和得到：</p>
+<p><center> <img src="/images/nnet1/1.png" alt="Alt text"></center></p>
+<p>这里x1,x2,···，xn是每个样本的个特征。之后将x代入sigmoid函数，即</p>
+<p><center> <img src="/images/nnet1/2.png" alt="Alt text"></center></p>
+<p>由于sigmoid函数的定义域为(-INF,INF)，值域为(0,1)，因此最基本的LR分类器适合对两类目标进行分类。而下面介绍的Logistic回归关键就在于如何求得w0,w1…,wn这组权值。整体思路就是用<strong>最大似然估计</strong>来做的。</p>
+<p>原文参考：<a href="https://blog.csdn.net/ariessurfer/article/details/41310525" target="_blank" rel="noopener">https://blog.csdn.net/ariessurfer/article/details/41310525</a></p>
+<h2 id="Softmax回归"><a href="#Softmax回归" class="headerlink" title="Softmax回归"></a>Softmax回归</h2><p>Softmax算法逻辑回归的扩展：<a href="https://blog.csdn.net/pi9nc/article/details/19336629" target="_blank" rel="noopener">https://blog.csdn.net/pi9nc/article/details/19336629</a></p>
+<h2 id="交叉熵的引入"><a href="#交叉熵的引入" class="headerlink" title="交叉熵的引入"></a>交叉熵的引入</h2><p>交叉熵代价函数的引入：<a href="https://blog.csdn.net/u012162613/article/details/44239919" target="_blank" rel="noopener">https://blog.csdn.net/u012162613/article/details/44239919</a></p>
+<h2 id="交叉熵的推导"><a href="#交叉熵的推导" class="headerlink" title="交叉熵的推导"></a>交叉熵的推导</h2><p>交叉熵的推导：<a href="https://blog.csdn.net/jasonzzj/article/details/52017438" target="_blank" rel="noopener">https://blog.csdn.net/jasonzzj/article/details/52017438</a></p>
+<h2 id="常用激活函数"><a href="#常用激活函数" class="headerlink" title="常用激活函数"></a>常用激活函数</h2><p><a href="https://blog.csdn.net/leo_xu06/article/details/53708647" target="_blank" rel="noopener">https://blog.csdn.net/leo_xu06/article/details/53708647</a></p>
+<p><a href="https://blog.csdn.net/kangyi411/article/details/78969642" target="_blank" rel="noopener">https://blog.csdn.net/kangyi411/article/details/78969642</a></p>
 
       
     </div>
@@ -434,9 +423,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
-            <a href="/tags/gcc/" rel="tag"># gcc</a>
+            <a href="/tags/交叉熵/" rel="tag"># 交叉熵</a>
           
         </div>
       
@@ -449,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/08/插值法将bayer原始数据转换为彩色图像/" rel="next" title="插值法将bayer原始数据转换为彩色图像">
-                <i class="fa fa-chevron-left"></i> 插值法将bayer原始数据转换为彩色图像
+              <a href="/2018/03/28/构建交叉平台开发环境/" rel="next" title="构建交叉平台开发环境">
+                <i class="fa fa-chevron-left"></i> 构建交叉平台开发环境
               </a>
             
           </div>
@@ -458,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/13/代码工程管理工具-make/" rel="prev" title="代码工程管理工具-make">
-                代码工程管理工具-make <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -604,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux学习之gcc"><span class="nav-number">1.</span> <span class="nav-text">Linux学习之gcc</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#logistic、softmax原理和交叉熵"><span class="nav-number">1.</span> <span class="nav-text">logistic、softmax原理和交叉熵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic回归"><span class="nav-number">1.1.</span> <span class="nav-text">Logistic回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax回归"><span class="nav-number">1.2.</span> <span class="nav-text">Softmax回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵的引入"><span class="nav-number">1.3.</span> <span class="nav-text">交叉熵的引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵的推导"><span class="nav-number">1.4.</span> <span class="nav-text">交叉熵的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用激活函数"><span class="nav-number">1.5.</span> <span class="nav-text">常用激活函数</span></a></li></ol></li></ol></div>
             
 
           </div>

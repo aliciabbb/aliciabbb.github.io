@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
 <meta property="og:description" content="RCNN学习笔记由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/RNN/1.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/1.png">
 <meta property="og:image" content="http://yoursite.com/images/RCNN/2.png">
 <meta property="og:image" content="http://yoursite.com/images/RCNN/3.png">
 <meta property="og:image" content="http://yoursite.com/images/RCNN/4.png">
@@ -106,11 +106,11 @@
 <meta property="og:image" content="http://yoursite.com/images/RCNN/15.png">
 <meta property="og:image" content="http://yoursite.com/images/RCNN/16.png">
 <meta property="og:image" content="http://yoursite.com/images/RCNN/17.png">
-<meta property="og:updated_time" content="2018-04-06T03:49:06.089Z">
+<meta property="og:updated_time" content="2018-04-06T03:53:28.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RCNN学习笔记">
 <meta name="twitter:description" content="RCNN学习笔记由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴">
-<meta name="twitter:image" content="http://yoursite.com/images/RNN/1.png">
+<meta name="twitter:image" content="http://yoursite.com/images/RCNN/1.png">
 
 
 
@@ -377,11 +377,11 @@
       
 
       
-        <h1 id="RCNN学习笔记"><a href="#RCNN学习笔记" class="headerlink" title="RCNN学习笔记"></a>RCNN学习笔记</h1><p>由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴趣的读者建议自行下载查阅。这里有文献的翻译，<a href="https://blog.csdn.net/wangsidadehao/article/details/54237567，不过建议看原文。当然也参考了很多博客，比如https://blog.csdn.net/column/details/ym-alanyannick.html，感谢大神们的整理。" target="_blank" rel="noopener">https://blog.csdn.net/wangsidadehao/article/details/54237567，不过建议看原文。当然也参考了很多博客，比如https://blog.csdn.net/column/details/ym-alanyannick.html，感谢大神们的整理。</a></p>
+        <h1 id="RCNN学习笔记"><a href="#RCNN学习笔记" class="headerlink" title="RCNN学习笔记"></a>RCNN学习笔记</h1><p>由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴趣的读者建议自行下载查阅。这里有文献的翻译，<a href="https://blog.csdn.net/wangsidadehao/article/details/54237567" target="_blank" rel="noopener">https://blog.csdn.net/wangsidadehao/article/details/54237567</a><br>，不过建议看原文。当然也参考了很多博客，比如<a href="https://blog.csdn.net/column/details/ym-alanyannick.html" target="_blank" rel="noopener">https://blog.csdn.net/column/details/ym-alanyannick.html</a><br>，感谢大神们的整理。</p>
 <h2 id="RCNN网络结构"><a href="#RCNN网络结构" class="headerlink" title="RCNN网络结构"></a>RCNN网络结构</h2><p> rcnn主要作用就是用于物体检测，就是首先通过selective search 选择2000个候选区域，这些区域中有我们需要的所对应的物体的边界框，然后对于每一个候选区域 都变化到固定的大227*227(AlexNet Input),对于每一个处理之后的图片，把他都放到CNN上去进行特征提取，得到每个候选区域的特征图,这些特征用固定长度的特征集合特征向量来表示。</p>
 <p>最后对于每一个类别，我们都会得到很多的特征向量，然后把这些特征向量直接放到svm现行分类器去判断，当前区域所对应的实物是其他背景还是所对应的物体类别，每个区域 都会给出所对应的分数。有些时候并不是说这些区域中所包含的实物就一点都不存在，有些包含的多有些包含的少，为了防止同一物体有多个边界框，所以我们才会对于每一区域给出包含实物类别多少的分数，选出前几个对大数值，然后再用非极大值抑制的方法来筛选，最后通过回归器就会得到所对应的边界框。</p>
 <p>经典结构：</p>
-<p><center> <img src="/images/RNN/1.png" alt="Alt text"></center></p>
+<p><center> <img src="/images/RCNN/1.png" alt="Alt text"></center></p>
 <p>主要包含：</p>
 <p>原图-&gt;候选区域生成-&gt;对每个候选区域利用深度学习网络进行特征提取-&gt;特征送入每一类SVM分类器中判别-&gt;回归器修正候选框位置</p>
 <h3 id="候选区域的生成"><a href="#候选区域的生成" class="headerlink" title="候选区域的生成"></a>候选区域的生成</h3><p>使用了Selective Search1方法从一张图像生成约2000-3000个候选区域。基本思路如下：</p>

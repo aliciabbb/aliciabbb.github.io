@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,物体检测," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="RCNN学习笔记由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴">
+<meta name="keywords" content="深度学习,物体检测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RCNN学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/06/RCNN学习笔记/index.html">
+<meta property="og:site_name" content="Stay Hungry Stay foolish">
+<meta property="og:description" content="RCNN学习笔记由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/RNN/1.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/2.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/3.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/4.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/5.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/6.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/18.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/7.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/8.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/9.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/10.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/11.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/12.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/13.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/14.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/141.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/15.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/16.png">
+<meta property="og:image" content="http://yoursite.com/images/RCNN/17.png">
+<meta property="og:updated_time" content="2018-04-06T03:49:06.089Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RCNN学习笔记">
+<meta name="twitter:description" content="RCNN学习笔记由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴">
+<meta name="twitter:image" content="http://yoursite.com/images/RNN/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/06/RCNN学习笔记/"/>
+
+
+
+
+
+  <title>RCNN学习笔记 | Stay Hungry Stay foolish</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stay Hungry Stay foolish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/RCNN学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Heb">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stay Hungry Stay foolish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RCNN学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T23:16:31+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/06/RCNN学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/06/RCNN学习笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RCNN学习笔记"><a href="#RCNN学习笔记" class="headerlink" title="RCNN学习笔记"></a>RCNN学习笔记</h1><p>由于最近要做无人驾驶方面的项目，所以开始接触到RCNN。RCNN可以说是利用深度学习进行目标检测的开山之作，之后的一系列经典网络都是在这个基础上形成的。所以我也花了相当长的时间学习这个网络，其中主要看了原作者的论文《Rich feature hierarchies for accurate object detection and semantic segmentation》，有兴趣的读者建议自行下载查阅。这里有文献的翻译，<a href="https://blog.csdn.net/wangsidadehao/article/details/54237567，不过建议看原文。当然也参考了很多博客，比如https://blog.csdn.net/column/details/ym-alanyannick.html，感谢大神们的整理。" target="_blank" rel="noopener">https://blog.csdn.net/wangsidadehao/article/details/54237567，不过建议看原文。当然也参考了很多博客，比如https://blog.csdn.net/column/details/ym-alanyannick.html，感谢大神们的整理。</a></p>
+<h2 id="RCNN网络结构"><a href="#RCNN网络结构" class="headerlink" title="RCNN网络结构"></a>RCNN网络结构</h2><p> rcnn主要作用就是用于物体检测，就是首先通过selective search 选择2000个候选区域，这些区域中有我们需要的所对应的物体的边界框，然后对于每一个候选区域 都变化到固定的大227*227(AlexNet Input),对于每一个处理之后的图片，把他都放到CNN上去进行特征提取，得到每个候选区域的特征图,这些特征用固定长度的特征集合特征向量来表示。</p>
+<p>最后对于每一个类别，我们都会得到很多的特征向量，然后把这些特征向量直接放到svm现行分类器去判断，当前区域所对应的实物是其他背景还是所对应的物体类别，每个区域 都会给出所对应的分数。有些时候并不是说这些区域中所包含的实物就一点都不存在，有些包含的多有些包含的少，为了防止同一物体有多个边界框，所以我们才会对于每一区域给出包含实物类别多少的分数，选出前几个对大数值，然后再用非极大值抑制的方法来筛选，最后通过回归器就会得到所对应的边界框。</p>
+<p>经典结构：</p>
+<p><center> <img src="/images/RNN/1.png" alt="Alt text"></center></p>
+<p>主要包含：</p>
+<p>原图-&gt;候选区域生成-&gt;对每个候选区域利用深度学习网络进行特征提取-&gt;特征送入每一类SVM分类器中判别-&gt;回归器修正候选框位置</p>
+<h3 id="候选区域的生成"><a href="#候选区域的生成" class="headerlink" title="候选区域的生成"></a>候选区域的生成</h3><p>使用了Selective Search1方法从一张图像生成约2000-3000个候选区域。基本思路如下：</p>
+<ul>
+<li>使用一种过分割手段，将图像分割成小区域 </li>
+<li>查看现有小区域，合并可能性最高的两个区域。重复直到整张图像合并成一个区域位置</li>
+<li>输出所有曾经存在过的区域，所谓候选区域</li>
+</ul>
+<p>注意：候选区的生成和后面的步骤相对独立，可以换任意的算法运行。</p>
+<h3 id="图片resize"><a href="#图片resize" class="headerlink" title="图片resize"></a>图片resize</h3><p>因为CNN分类器需要输入的图片大小一致，所以这一步将图片都resize成为227*227大小的，论文中试验了两种不同的resize处理方法:</p>
+<p><strong>各项异性缩放：</strong></p>
+<p>这种方法很简单，就是不管图片的长宽比例，管它是否扭曲，进行缩放就是了，全部缩放到CNN输入的大小227*227，如下图(D)所示。</p>
+<p><strong>各项同性缩放：</strong></p>
+<p>因为图片扭曲后，估计会对后续CNN的训练精度有影响，于是作者也测试了“各向同性缩放”方案。这个有两种办法：</p>
+<p>1、直接在原始图片中，把bounding box的边界进行扩展延伸成正方形，然后再进行裁剪；如果已经延伸到了原始图片的外边界，那么就用bounding box中的颜色均值填充；如下图(B)所示。</p>
+<p>2、先把bounding box图片裁剪出来，然后用固定的背景颜色填充成正方形图片(背景颜色也是采用bounding box的像素颜色均值)；如下图(C)所示。</p>
+<p><center> <img src="/images/RCNN/2.png" alt="Alt text"></center></p>
+<h3 id="用CNN进行特征提取"><a href="#用CNN进行特征提取" class="headerlink" title="用CNN进行特征提取"></a>用CNN进行特征提取</h3><p><strong>修正区域大小以适合CNN的输入，做一次前向运算，将第五个池化层的输出（就是对候选框提取到的特征）存到硬盘。</strong></p>
+<p>文章提到，网络架构有两个可选方案：第一选择经典的Alexnet；第二选择VGG16。经过测试Alexnet精度为58.5%，VGG16精度为66%。VGG这个模型的特点是选择比较小的卷积核、选择较小的跨步，这个网络的精度高，不过计算量是Alexnet的7倍。后面为了简单起见，就直接选用Alexnet，并进行讲解；Alexnet特征提取部分包含了5个卷积层、2个全连接层，在Alexnet中p5层神经元个数为9216、 f6、f7的神经元个数都是4096，通过这个网络训练完毕后，最后提取特征每个输入候选框图片都能得到一个4096维的特征向量。</p>
+<h3 id="SVM分类"><a href="#SVM分类" class="headerlink" title="SVM分类"></a>SVM分类</h3><p>用CNN提取特征后，就要送入训练好的SVM分类器进行分类，然后对候选区域打分（这里的详细过程为：当我们用CNN提取2000个候选框，可以得到2000x4096这样的特征向量矩阵，然后我们只需要把这样的一个矩阵与svm权值矩阵4096<em>N矩阵乘，得到2000</em>N的矩阵，就是每一个类对2000个候选框的打分，N为分类类别数目，就可以得到结果了）。下面一节会详细介绍RCNN的训练过程。分类完毕后，就要用非极大值抑制的方法，筛选候选框。</p>
+<h4 id="IOU的定义"><a href="#IOU的定义" class="headerlink" title="IOU的定义"></a>IOU的定义</h4><p>因为没有搞过物体检测不懂IOU这个概念，所以就简单介绍一下。物体检测需要定位出物体的bounding box，就像下面的图片一样，我们不仅要定位出车辆的bounding box 我们还要识别出bounding box 里面的物体就是车辆。对于bounding box的定位精度，有一个很重要的概念，因为我们算法不可能百分百跟人工标注的数据完全匹配，因此就存在一个定位精度评价公式：IOU。</p>
+<p><center> <img src="/images/RCNN/3.png" alt="Alt text"></center></p>
+<p>IOU定义了两个bounding box的重叠度，如下图所示：</p>
+<p><center> <img src="/images/RCNN/4.png" alt="Alt text"></center></p>
+<p>矩形框A、B的一个重合度IOU计算公式为：IOU=(A∩B)/(A∪B)</p>
+<p>就是矩形框A、B的重叠面积占A、B并集的面积比例:IOU=SI/(SA+SB-SI)</p>
+<h4 id="非极大值抑制基础知识"><a href="#非极大值抑制基础知识" class="headerlink" title="非极大值抑制基础知识"></a>非极大值抑制基础知识</h4><p>如下图所示，定位一个车辆，最后算法就找出了一堆的方框，我们需要判别哪些矩形框是没用的。非极大值抑制：先假设有6个矩形框，根据分类器类别分类概率做排序，从小到大分别属于车辆的概率分别为A、B、C、D、E、F。</p>
+<p>1、从最大概率矩形框F开始，分别判断A~E与F的重叠度IOU是否大于某个设定的阈值;</p>
+<p>2、假设B、D与F的重叠度超过阈值，那么就扔掉B、D；并标记第一个矩形框F，是我们保留下来的。</p>
+<p>3、从剩下的矩形框A、C、E中，选择概率最大的E，然后判断E与A、C的重叠度，重叠度大于一定的阈值，那么就扔掉；并标记E是我们保留下来的第二个矩形框。</p>
+<p>就这样一直重复，找到所有被保留下来的矩形框。</p>
+<p><center> <img src="/images/RCNN/5.png" alt="Alt text"></center></p>
+<h3 id="回归器修正候选框位置"><a href="#回归器修正候选框位置" class="headerlink" title="回归器修正候选框位置"></a>回归器修正候选框位置</h3><p>目标检测问题的衡量标准是重叠面积（IoU），许多看似准确的检测结果，往往因为候选框不够准确，重叠面积很小。故需要一个位置精修步骤。</p>
+<p>对每一类目标，使用一个线性脊回归器进行精修。正则项λ=10000。 输入为深度网络pool5层的4096维特征，输出为xy方向的缩放和平移。<br>训练样本 ：判定为本类的候选框中，和真值重叠面积大于0.6的候选框。</p>
+<p><strong>以上是整个网络的运行流程，RCNN的训练也是比较麻烦的，所以下面一节着重介绍RCNN的训练过程以及一些个人的理解。</strong></p>
+<h2 id="RCNN的训练流程"><a href="#RCNN的训练流程" class="headerlink" title="RCNN的训练流程"></a>RCNN的训练流程</h2><p>RCNN的训练过程主要包括以下几步：</p>
+<ul>
+<li>有监督预训练</li>
+<li>调优训练</li>
+<li>SVM分类器训练</li>
+<li>线性回归模型训练（边框回归并没有在神经网络内部，可以看作是单独出来的。就是r-cnn需要两次进行跑cnn model，第一次得到classification的结果，第二次才能得到bounding-box。）</li>
+</ul>
+<h3 id="有监督预训练"><a href="#有监督预训练" class="headerlink" title="有监督预训练"></a>有监督预训练</h3><p>参数初始化部分：物体检测的一个难点在于，物体标签训练数据少，如果要直接采用随机初始化CNN参数的方法，那么目前的训练数据量是远远不够的。这种情况下，最好的是采用某些方法，把参数初始化了，然后在进行有监督的参数微调，这边文献采用的是有监督的预训练。所以paper在设计网络结构的时候，是直接用Alexnet的网络，然后连参数也是直接采用它的参数，作为初始的参数值，然后再fine-tuning训练。</p>
+<p>如下图所示：</p>
+<p><center> <img src="/images/RCNN/6.png" alt="Alt text"></center></p>
+<p>训练数据：ILSVRC 2012的数据集</p>
+<p><center> <img src="/images/RCNN/18.png" alt="Alt text"></center></p>
+<p>此网络提取的特征为4096维，之后送入一个4096-&gt;1000的全连接(fc)层进行分类。输入一张图片，输出1000维的类别标号，学习率0.01。</p>
+<h3 id="调优训练"><a href="#调优训练" class="headerlink" title="调优训练"></a>调优训练</h3><p>我们接着采用selective search 搜索出来的候选框，然后处理到指定大小图片，继续对上面预训练的cnn模型进行fine-tuning训练。假设要检测的物体类别有N类，那么我们就需要把上面预训练阶段的CNN模型的最后一层给替换掉，替换成N+1个输出的神经元(加1，表示还有一个背景) (20 + 1bg)，然后这一层直接采用参数随机初始化的方法，其它网络层的参数不变；接着就可以开始继续SGD（随机梯度下降）训练了。开始的时候，SGD学习率选择0.001，在每次训练的时候，我们batch size大小选择128，其中32个是正样本、96个是负样本。</p>
+<p>训练数据：使用PASCAL VOC 2007的训练集，输入一张图片，输出21维的类别标号，表示20类+背景。</p>
+<p>如果当前region  proposal和真实框的IOU大于0.5，把他标记为positive，其余的是作为negtive，去训练网络。并且对随机梯度下降的参数进行的适当的修改。</p>
+<p><center> <img src="/images/RCNN/7.png" alt="Alt text"></center></p>
+<h3 id="SVM分类器训练"><a href="#SVM分类器训练" class="headerlink" title="SVM分类器训练"></a>SVM分类器训练</h3><p>在讲SVM分类器训练之前，有一个问题需要讨论，就是就是既然这里CNN已经训练好了，可以用于20类+1个背景的分类的，那为什么还需要再把提取的特征用于训练svm分类器？</p>
+<p><strong>这里原作者也给出了解释：</strong></p>
+<p>这个是因为svm训练和cnn训练过程的正负样本定义方式各有不同，导致最后采用CNN softmax输出比采用svm精度还低。</p>
+<p>1、cnn在训练的时候，对训练数据做了比较宽松的标注，比如一个bounding box可能只包含物体的一部分，那么我也把它标注为正样本，用于训练cnn；</p>
+<p>2、采用这个方法的主要原因在于因为CNN容易过拟合，所以需要大量的训练数据，所以在CNN训练阶段我们是对Bounding box的位置限制条件限制的比较松(IOU只要大于0.5都被标注为正样本了)；</p>
+<p>3、然而svm训练的时候，因为svm适用于少样本训练，所以对于训练样本数据的IOU要求比较严格，我们只有当bounding box把整个物体都包含进去了，我们才把它标注为物体类别，然后训练svm。</p>
+<p>作者同样是使用IoU阈值的方法，这次的阈值为0.3（<strong>为什么比0.5还小？</strong>），计算每一个region proposal与标准框的IoU，大于这个阈值的作为正样本，小于的作为负样本。由于训练样本比较大，作者使用了standard hard negative mining method来训练分类器。</p>
+<p>总的来说，就是加上一个SVM分类器，识别精度更高了！</p>
+<p><center> <img src="/images/RCNN/8.png" alt="Alt text"></center></p>
+<p>一旦CNN f7层特征被提取出来，那么我们将为每个物体累训练一个svm分类器。当我们用CNN提取2000个候选框，可以得到2000x4096这样的特征向量矩阵，然后我们只需要把这样的一个矩阵与svm权值矩阵4096*N点（Therefore，the pool5 need to be set as）乘(N为分类类别数目，因为我们训练的N个svm，每个svm包好了4096个W)，就可以得到结果了。</p>
+<h3 id="线性回归模型训练（边界框回归）"><a href="#线性回归模型训练（边界框回归）" class="headerlink" title="线性回归模型训练（边界框回归）"></a>线性回归模型训练（边界框回归）</h3><p>【摘自论文】</p>
+<p>我们用一个简单的边界框回归阶段来提高定位性能。在使用一个特定类检测的SVM对每个选择性搜索候选值进行评分之后，我们使用特定类的边界框回归来预测用于检测的新边界框。这类似于在可变形部分模型[17]中使用的边界框回归。这两种方法主要的不同是，这里我们从CNN计算的特征，而不是从推断的DPM部分位置计算的几何特征回归。<br>　　我们训练算法的输入是一个N个训练对的集合<img src="/images/RCNN/9.png" alt="Alt text">，其中<img src="/images/RCNN/10.png" alt="Alt text">指的是候选Pi的边界框的中心和Pi的宽和高的坐标。因此接下来，我们删除上标i，除非它是必须的。每一个真实的边界框G是以相同的方式指定的：<img src="/images/RCNN/11.png" alt="Alt text">。我们的目标就是学习一个转换，其将一个候选框P映射到真实框G上。 </p>
+<p>我们根据四个函数<img src="/images/RCNN/12.png" alt="Alt text">来对这种转换进行参数化。前两个指的是P的边界框的中心的尺度不变的转换，后两个指定P的边界框的宽度和高度的对数空间平移。在学习了这些函数之后，我们可以通过应用这些转换将一个输入的候选P转换到一个预测的真实框<img src="/images/RCNN/13.png" alt="Alt text">。</p>
+<p><center> <img src="/images/RCNN/14.png" alt="Alt text"></center></p>
+<p><center> <img src="/images/RCNN/141.png" alt="Alt text"></center></p>
+<p>每一个函数d∗(P)（∗∗是x,y,h,wx,y,h,w中的一个）被建模成候选P的pool5特征的一个线性函数，标记成ϕ5(P)。隐含地假设ϕ5(P)对于图像数据是依赖的。因此我们有<img src="/images/RCNN/15.png" alt="Alt text">。</p>
+<p>其中w∗是一个可学习的模型的参数。我们通过优化正则化的最小二乘目标函数（岭回归）来学习w∗ 。</p>
+<p><center> <img src="/images/RCNN/16.png" alt="Alt text"></center></p>
+<p>对于训练对（P,G）的回归目标t∗定义如下： </p>
+<p><center> <img src="/images/RCNN/17.png" alt="Alt text"></center></p>
+<p>作为一种标准的正则化最小二乘问题，这可以以封闭形式有效地解决。<br>　　我们在实现边界框回归的时候发现了两个微妙的问题。第一个就是正则化是非常重要的：基于验证集，我们设置λ=1000。第二个问题是，在选择使用哪个训练对（P；G）时必须小心。直观地，如果远离所有的真实框，那么将P转换到真实框G的任务就没有意义。使用像P这样的例子将会导致一个无望的学习问题。因此，我们只从这样的候选P中进行学习，其至少与一个真实框离的比较近。我们通过将P分配给真实框G，当前仅当重叠大于阈值（我们使用一个验证集设置成0.6）时，它与其具有最大的IoU重叠（以防重叠超过一个）。所有未分配的候选区域都被丢弃。对于每一个对象类我们只做一次，以便学习一组特定类边界框的回归器。<br>　　在测试的时候，我们为每一个候选框打分，并且预测一次它的新检测窗口。原则上来说，我们可以迭代这个过程（即，为新得到的预测框重新打分，然后从它再预测一个新的边界框，以此类推）。然而，我们发现迭代没有改善结果。</p>
+<p>这篇讲解也很清晰：<a href="https://blog.csdn.net/u011534057/article/details/51235964" target="_blank" rel="noopener">https://blog.csdn.net/u011534057/article/details/51235964</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="John Heb 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="John Heb 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/物体检测/" rel="tag"># 物体检测</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/logistic、softmax原理和交叉熵/" rel="next" title="logistic、softmax原理和交叉熵">
+                <i class="fa fa-chevron-left"></i> logistic、softmax原理和交叉熵
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="John Heb" />
+            
+              <p class="site-author-name" itemprop="name">John Heb</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RCNN学习笔记"><span class="nav-number">1.</span> <span class="nav-text">RCNN学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RCNN网络结构"><span class="nav-number">1.1.</span> <span class="nav-text">RCNN网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#候选区域的生成"><span class="nav-number">1.1.1.</span> <span class="nav-text">候选区域的生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片resize"><span class="nav-number">1.1.2.</span> <span class="nav-text">图片resize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用CNN进行特征提取"><span class="nav-number">1.1.3.</span> <span class="nav-text">用CNN进行特征提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM分类"><span class="nav-number">1.1.4.</span> <span class="nav-text">SVM分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IOU的定义"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">IOU的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非极大值抑制基础知识"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">非极大值抑制基础知识</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归器修正候选框位置"><span class="nav-number">1.1.5.</span> <span class="nav-text">回归器修正候选框位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RCNN的训练流程"><span class="nav-number">1.2.</span> <span class="nav-text">RCNN的训练流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有监督预训练"><span class="nav-number">1.2.1.</span> <span class="nav-text">有监督预训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调优训练"><span class="nav-number">1.2.2.</span> <span class="nav-text">调优训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM分类器训练"><span class="nav-number">1.2.3.</span> <span class="nav-text">SVM分类器训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性回归模型训练（边界框回归）"><span class="nav-number">1.2.4.</span> <span class="nav-text">线性回归模型训练（边界框回归）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Heb</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Views
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'aliciabbb',
+            repo: 'gitment-comment# MUST HAVE, The repo you use to store Gitment comments',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '68e9dc4b6035c5b9c6f594248ebeefb5bef1dbdb',
+            
+                client_id: '404f156cc099a34e63a6'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

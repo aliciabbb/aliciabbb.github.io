@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://yoursite.com/images/pi1/10.png">
 <meta property="og:image" content="http://yoursite.com/images/pi1/5.png">
 <meta property="og:image" content="http://yoursite.com/images/pi1/4.png">
-<meta property="og:updated_time" content="2018-04-07T06:06:44.709Z">
+<meta property="og:updated_time" content="2018-04-07T06:07:59.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建交叉平台开发环境">
 <meta name="twitter:description" content="构建交叉平台开发环境刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。 主要实现以下目标  充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。 能够建立主机与目标机之间传递数据的基本方法。 能够下载安装Linux及相关工具到目标机。 学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。  内容包括以下部分  针对所选">
@@ -403,7 +403,7 @@
 <p>3、配置环境变量</p>
 <p>打开./bashrc文件<br> <code>sudo gedit ~/.bashrc</code><br>加入：<br><code>export PATH=$PATH:$HOME/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin</code></p>
 <p>如果是32位机，则去掉-x64。注意文件夹位置要对应，这里的tools安装在了raspberrypi文件夹里。</p>
-<p>4、检测是否安装成功</p>
+<p><code>source .bashrc</code><br>4、检测是否安装成功</p>
 <p><code>arm</code></p>
 <p><center> <img src="/images/pi1/2.png" alt="Alt text"></center></p>
 <p>不过建议用这个指令，’arm’有时抽风，我也不再清楚为什么。<br><code>arm-linux-gnueabihf-gcc -v</code><br>不报错则安装成功。</p>

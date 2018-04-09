@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/images/FCN/13.png">
 <meta property="og:image" content="http://yoursite.com/images/FCN/14.png">
 <meta property="og:image" content="http://yoursite.com/images/FCN/15.png">
-<meta property="og:updated_time" content="2018-04-09T11:57:02.932Z">
+<meta property="og:updated_time" content="2018-04-09T12:02:29.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FCN学习笔记">
 <meta name="twitter:description" content="FCN学习笔记——主要参考 https://blog.csdn.net/gyh_420/article/details/78570415 https://www.cnblogs.com/xuanxufeng/p/6249834.html https://blog.csdn.net/taigw/article/details/51401448  https://blog.csdn.net/qq_37">
@@ -430,7 +430,7 @@
 <p>对于FCN-8s同理。</p>
 <p>较浅层的预测结果包含了更多细节信息。比较2,3,4阶段可以看出，跳级结构利用浅层信息辅助逐步升采样，有更精细的结果。 </p>
 <p><center> <img src="/images/FCN/11.png" alt="Alt text"></center></p>
-<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p><strong>第1阶段</strong></p>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p><strong>第1阶段</strong></p>
 <p><center> <img src="/images/FCN/12.png" alt="Alt text"></center></p>
 <p>以经典的分类网络为初始化。最后两级是全连接（红色），参数弃去不用。</p>
 <p><strong>第2阶段</strong></p>
@@ -659,7 +659,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FCN学习笔记"><span class="nav-number">1.</span> <span class="nav-text">FCN学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#从图像分类到图像分割"><span class="nav-number">1.1.</span> <span class="nav-text">从图像分类到图像分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反卷积的理解"><span class="nav-number">1.2.</span> <span class="nav-text">反卷积的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FCN详解"><span class="nav-number">1.3.</span> <span class="nav-text">FCN详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全连接层和卷积层的转化"><span class="nav-number">1.3.1.</span> <span class="nav-text">全连接层和卷积层的转化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络结构"><span class="nav-number">1.3.2.</span> <span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳跃结构（Skip-Architecture）"><span class="nav-number">1.3.3.</span> <span class="nav-text">跳跃结构（Skip Architecture）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#训练过程"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">训练过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">1.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FCN学习笔记"><span class="nav-number">1.</span> <span class="nav-text">FCN学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#从图像分类到图像分割"><span class="nav-number">1.1.</span> <span class="nav-text">从图像分类到图像分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反卷积的理解"><span class="nav-number">1.2.</span> <span class="nav-text">反卷积的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FCN详解"><span class="nav-number">1.3.</span> <span class="nav-text">FCN详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全连接层和卷积层的转化"><span class="nav-number">1.3.1.</span> <span class="nav-text">全连接层和卷积层的转化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络结构"><span class="nav-number">1.3.2.</span> <span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳跃结构（Skip-Architecture）"><span class="nav-number">1.3.3.</span> <span class="nav-text">跳跃结构（Skip Architecture）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练过程"><span class="nav-number">1.3.4.</span> <span class="nav-text">训练过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">1.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/images/FCN/13.png">
 <meta property="og:image" content="http://yoursite.com/images/FCN/14.png">
 <meta property="og:image" content="http://yoursite.com/images/FCN/15.png">
-<meta property="og:updated_time" content="2018-04-09T12:02:29.776Z">
+<meta property="og:updated_time" content="2018-04-09T12:05:18.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FCN学习笔记">
 <meta name="twitter:description" content="FCN学习笔记——主要参考 https://blog.csdn.net/gyh_420/article/details/78570415 https://www.cnblogs.com/xuanxufeng/p/6249834.html https://blog.csdn.net/taigw/article/details/51401448  https://blog.csdn.net/qq_37">
@@ -444,7 +444,6 @@
 <p>升采样分为三次完成（橙色×3）。<br>进一步融合了第3个pooling层的预测结果。<br>第三次反卷积步长为8，记为FCN-8s。<br>这一阶段使用单GPU训练约需1天。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>发展到现在，基于深度学习的图像语义分割“通用框架已经确定”：前端 FCN（包含基于此的改进 SegNet、DeconvNet、DeepLab）+ 后端 CRF/MRF （条件随机场/马尔科夫随机场）优化。后面会继续探讨。</p>
 <p>事实上，FCN有一些短处，例如使用了较浅层的特征，因为fuse操作会加上较上层的pool特征值，导致高维特征不能很好得以使用，同时也因为使用较上层的pool特征值，导致FCN对图像大小变化有所要求，如果测试集的图像远大于或小于训练集的图像，FCN的效果就会变差。但是，也由于FCN提出了一种新的语义分割的方法，才使得有后面韩国Hyeonwoo Noh的对称反卷积网络，剑桥的SegNet等优秀用于语义分割的CNN网络。</p>
-<p>第2阶段</p>
 
       
     </div>

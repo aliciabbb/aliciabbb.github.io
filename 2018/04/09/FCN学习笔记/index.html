@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,图像分割,FCN," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="FCN学习笔记——主要参考 https://blog.csdn.net/gyh_420/article/details/78570415 https://www.cnblogs.com/xuanxufeng/p/6249834.html https://blog.csdn.net/taigw/article/details/51401448  https://blog.csdn.net/qq_37">
+<meta name="keywords" content="深度学习,图像分割,FCN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FCN学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/FCN学习笔记/index.html">
+<meta property="og:site_name" content="Stay Hungry Stay foolish">
+<meta property="og:description" content="FCN学习笔记——主要参考 https://blog.csdn.net/gyh_420/article/details/78570415 https://www.cnblogs.com/xuanxufeng/p/6249834.html https://blog.csdn.net/taigw/article/details/51401448  https://blog.csdn.net/qq_37">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/FCN/1.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/2.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/3.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/4.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/5.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/6.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/7.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/8.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/9.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/10.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/11.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/12.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/13.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/14.png">
+<meta property="og:image" content="http://yoursite.com/images/FCN/15.png">
+<meta property="og:updated_time" content="2018-04-09T11:57:02.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FCN学习笔记">
+<meta name="twitter:description" content="FCN学习笔记——主要参考 https://blog.csdn.net/gyh_420/article/details/78570415 https://www.cnblogs.com/xuanxufeng/p/6249834.html https://blog.csdn.net/taigw/article/details/51401448  https://blog.csdn.net/qq_37">
+<meta name="twitter:image" content="http://yoursite.com/images/FCN/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/09/FCN学习笔记/"/>
+
+
+
+
+
+  <title>FCN学习笔记 | Stay Hungry Stay foolish</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Stay Hungry Stay foolish</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/FCN学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Heb">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stay Hungry Stay foolish">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">FCN学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T19:57:31+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/09/FCN学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/09/FCN学习笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="FCN学习笔记"><a href="#FCN学习笔记" class="headerlink" title="FCN学习笔记"></a>FCN学习笔记</h1><p>——主要参考</p>
+<p><a href="https://blog.csdn.net/gyh_420/article/details/78570415" target="_blank" rel="noopener">https://blog.csdn.net/gyh_420/article/details/78570415</a></p>
+<p><a href="https://www.cnblogs.com/xuanxufeng/p/6249834.html" target="_blank" rel="noopener">https://www.cnblogs.com/xuanxufeng/p/6249834.html</a></p>
+<p><a href="https://blog.csdn.net/taigw/article/details/51401448" target="_blank" rel="noopener">https://blog.csdn.net/taigw/article/details/51401448</a> </p>
+<p><a href="https://blog.csdn.net/qq_37274615/article/details/73251503" target="_blank" rel="noopener">https://blog.csdn.net/qq_37274615/article/details/73251503</a></p>
+<p>——以下正文</p>
+<h2 id="从图像分类到图像分割"><a href="#从图像分类到图像分割" class="headerlink" title="从图像分类到图像分割"></a>从图像分类到图像分割</h2><p>卷积神经网络（CNN）自2012年以来，在图像分类和图像检测等方面取得了巨大的成就和广泛的应用。</p>
+<p>CNN的强大之处在于它的多层结构能自动学习特征，并且可以学习到多个层次的特征：较浅的卷积层感知域较小，学习到一些局部区域的特征；较深的卷积层具有较大的感知域，能够学习到更加抽象一些的特征。这些抽象特征对物体的大小、位置和方向等敏感性更低，从而有助于识别性能的提高。</p>
+<p>这些抽象的特征对分类很有帮助，可以很好地判断出一幅图像中包含什么类别的物体，但是因为丢失了一些物体的细节，不能很好地给出物体的具体轮廓、指出每个像素具体属于哪个物体，因此做到精确的分割就很有难度。</p>
+<p>传统的基于CNN的分割方法的做法通常是：为了对一个像素分类，使用该像素周围的一个图像块作为CNN的输入用于训练和预测。这种方法有几个缺点：一是存储开销很大。例如对每个像素使用的图像块的大小为15x15，则所需的存储空间为原来图像的225倍。二是计算效率低下。相邻的像素块基本上是重复的，针对每个像素块逐个计算卷积，这种计算也有很大程度上的重复。三是像素块大小的限制了感知区域的大小。通常像素块的大小比整幅图像的大小小很多，只能提取一些局部的特征，从而导致分类的性能受到限制。</p>
+<p>针对这个问题, UC Berkeley的Jonathan Long等人提出了Fully Convolutional Networks (FCN)用于图像的分割。该网络试图从抽象的特征中恢复出每个像素所属的类别。即从图像级别的分类进一步延伸到像素级别的分类。</p>
+<h2 id="反卷积的理解"><a href="#反卷积的理解" class="headerlink" title="反卷积的理解"></a>反卷积的理解</h2><p>在详细学习FCN前，我们要先了解反卷积的概念，这也是FCN中实现上采样的过程。首先我们回顾下卷积的过程，如下图，通过滑动卷积核，就可以得到整张图片的卷积结果。我们可以看到，原图大小为5x5，卷积核大小为3x3，卷积后的大小为3x3。</p>
+<p><center> <img src="/images/FCN/1.png" alt="Alt text"></center></p>
+<p>其实在Matlab中，对二维的卷积计算分了三类，分别为1.full   2.same   3. valid。上面的卷积就属于vaild。那么full又是什么呢？如下图：</p>
+<p><center> <img src="/images/FCN/2.png" alt="Alt text"></center></p>
+<p>上图中蓝色为原图像，白色为对应卷积所增加的padding，通常全部为0，绿色是卷积后图片。图6的卷积的滑动是从卷积核右下角与图片左上角重叠开始进行卷积，滑动步长为1，卷积核的中心元素对应卷积后图像的像素点。可以看到卷积后的图像是4X4，比原图2X2大了，我们还记1维卷积大小是n1+n2-1，这里原图是2X2，卷积核3X3，卷积后结果是4X4，与一维完全对应起来了。其实这才是完整的卷积计算，其他比它小的卷积结果都是省去了部分像素的卷积。</p>
+<p>这里，我们可以总结出full，same，valid三种卷积后图像大小的计算公式：<br>1.full: 滑动步长为1，图片大小为N1xN1，卷积核大小为N2xN2，卷积后图像大小：(N1+N2-1 )x (N1+N2-1)<br>如上图中， 滑动步长为1，图片大小为2x2，卷积核大小为3x3，卷积后图像大小：4x4<br>2.same: 滑动步长为1，图片大小为N1xN1，卷积核大小为N2xN2，卷积后图像大小：N1xN1<br>3.valid:滑动步长为S，图片大小为N1xN1，卷积核大小为N2xN2，卷积后图像大小：((N1-N2)/S+1) x ((N1-N2)/S+1)</p>
+<p>在了解了上面的过程后，我们来引入反卷积。</p>
+<p>目前使用最多的反卷积主要有两种方法：</p>
+<ul>
+<li>full卷积， 完整的卷积可以使得原来的定义域变大</li>
+<li>记录pooling index，然后扩大空间，再用卷积填充</li>
+</ul>
+<p>Full卷积上面已经介绍过，下面介绍第二种方法。假设原图是3X3，首先使用上采样让图像变成7X7，可以看到图像多了很多空白的像素点。使用一个3X3的卷积核对图像进行滑动步长为1的valid卷积，得到一个5X5的图像，我们知道的是使用上采样扩大图片，使用反卷积填充图像内容，使得图像内容变得丰富，这也是CNN输出end to end结果的一种方法。如下图：</p>
+<p><center> <img src="/images/FCN/3.png" alt="Alt text"></center></p>
+<p>而FCN作者使用的方法是这里所说反卷积的一种变体，这样就可以获得相应的像素值，图像可以实现end to end。详细过程如下：</p>
+<p><center> <img src="/images/FCN/4.png" alt="Alt text"></center></p>
+<p>输入：2x2， 卷积核：4x4， 滑动步长：3， 输出：7x7</p>
+<p>即输入为2x2的图片经过4x4的卷积核进行步长为3的反卷积的过程<br>1.输入图片每个像素进行一次full卷积，根据full卷积大小计算可以知道每个像素的卷积后大小为 1+4-1=4， 即4x4大小的特征图，输入有4个像素所以4个4x4的特征图。<br>2.将4个特征图进行步长为3的fusion（即相加）； 例如红色的特征图仍然是在原来输入位置（左上角），绿色还是在原来的位置（右上角），步长为3是指每隔3个像素进行fusion，重叠部分进行相加，即输出的第1行第4列是由红色特阵图的第一行第四列与绿色特征图的第一行第一列相加得到，其他如此类推。</p>
+<p>可以看出翻卷积的大小是由卷积核大小与滑动步长决定， in是输入大小， k是卷积核大小， s是滑动步长， out是输出大小。<br>得到 out = (in - 1) <em> s + k<br>上图过程就是， (2 - 1) </em> 3 + 4 = 7</p>
+<p>这里的步长也可以这样理解 当stride =1 时，如下的左图，当stride=2时，如下的右图</p>
+<p> <img src="/images/FCN/5.png" alt="Alt text"> <img src="/images/FCN/6.png" alt="Alt text"></p>
+<p>这样看来，当stride =1的时候，可以看成full卷积，而当stride&gt;1的时候，卷积过程是否就是上述第二种反卷积的一种变体呢？</p>
+<h2 id="FCN详解"><a href="#FCN详解" class="headerlink" title="FCN详解"></a>FCN详解</h2><p>我们分类使用的网络通常会在最后连接几层全连接层，它会将原来二维的矩阵（图片）压扁成一维的，从而丢失了空间信息，最后训练输出一个标量，这就是我们的分类结果。</p>
+<p>而图像语义分割的输出需要是个分割图，且不论尺寸大小，但是至少是二维的。所以，我们需要丢弃全连接层，换上全卷积层，而这就是全卷积网络了。</p>
+<h3 id="全连接层和卷积层的转化"><a href="#全连接层和卷积层的转化" class="headerlink" title="全连接层和卷积层的转化"></a>全连接层和卷积层的转化</h3><p>全连接层和卷积层唯一的不同就是卷积层中的神经元只与输入数据中的一个局部区域连接，并且在卷积列中的神经元共享参数。<br>但是这两类层的神经元都是计算点积，它们的函数形式是一样的。因此，将此两者相互转化是可能的。</p>
+<p>对于任意一个卷积层，都存在一个能实现和它一样的前向传播函数的全连接层。权重矩阵是一个巨大的矩阵，除了某些特定块，其余部分都是零。而在其中大部分块中，元素都是相等的。</p>
+<p>任何全连接层都可以被转化为卷积层。<br>假设一个 numout=4096 的全连接层，输入数据体的尺寸是 7∗7∗512，这个全连接层可以被等效地看做一个 Kernel=7,P=0,S=1,numout=4096 的卷积层。<br>也就是将滤波器的尺寸设置为和输入数据体的尺寸一致了，这个结果就和使用初始的那个全连接层一样了。</p>
+<p>全连接层转化为卷积层：在两种变换中，将全连接层转化为卷积层在实际运用中更加有用。</p>
+<p>假设卷积神经网络的输入是224x224x3的图像，一系列的卷积层和下采样层将图像数据变为尺寸为 7x7x512 的数据体。AlexNet使用了两个尺寸为4096的全连接层，最后一个有1000个神经元的全连接层用于计算分类评分。<br>我们可以将这3个全连接层中的任意一个转化为卷积层：</p>
+<p>第一个连接区域是[7x7x512]的全连接层，令其滤波器尺寸为Kernel=7，这样输出数据体就为[1x1x4096]了； </p>
+<p>第二个全连接层，令其滤波器尺寸为Kernel=1，这样输出数据体为[1x1x4096]；<br>最后一个全连接层也做类似的，令其Kernel=1，最终输出为[1x1x1000]。</p>
+<p><center> <img src="/images/FCN/7.png" alt="Alt text"></center></p>
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>下图是一个全卷积层，与CNN不一样的是图像对应的大小下标，CNN中输入的图像大小是同意固定resize成 227x227 大小的图像，第一层pooling后为55x55，第二层pooling后图像大小为27x27，第五层pooling后的图像大小为13x13。 </p>
+<p>而FCN输入的图像是HxW大小，第一层pooling后变为原图大小的1/4，第二层变为原图大小的1/8，第五层变为原图大小的1/16，第八层变为原图大小的1/32。</p>
+<p><center> <img src="/images/FCN/8.png" alt="Alt text"></center></p>
+<p>经过多次卷积和pooling以后，得到的图像越来越小，分辨率越来越低。其中图像到 H/32∗W/32 的时候图片是最小的一层时，所产生图叫做heatmap热图，热图就是我们最重要的高维特征图，得到高维特征的heatmap之后就是最重要的一步也是最后的一步对原图像进行upsampling，把图像进行放大、放大、放大到原图像的大小。如下图。</p>
+<p><center> <img src="/images/FCN/9.png" alt="Alt text"></center></p>
+<h3 id="跳跃结构（Skip-Architecture）"><a href="#跳跃结构（Skip-Architecture）" class="headerlink" title="跳跃结构（Skip Architecture）"></a>跳跃结构（Skip Architecture）</h3><p>经过前两步操作，基本就能实现语义分割了，但是直接将全卷积后的结果进行反卷积，得到的结果往往比较粗糙。跳跃结构可以看作是一种优化。</p>
+<p><center> <img src="/images/FCN/10.png" alt="Alt text"></center></p>
+<p>image是原图像，conv1,conv2..,conv5为卷积操作，pool1,pool2,..pool5为pool操作（pool就是使得图片变为原图的1/2），注意con6-7是最后的卷积层，最右边一列是upsample后的end to end结果。必须说明的是图中nx是指对应的特征图上采样n倍（即变大n倍），并不是指有n个特征图，如32x upsampled 中的32x是图像只变大32倍，不是有32个上采样图像，又如2x conv7是指conv7的特征图变大2倍。</p>
+<p>第一行对应FCN-32s，第二行对应FCN-16s，第三行对应FCN-8s。 </p>
+<p>先从FCN-32s开始说明upsample过程，只需要留意第一行，从特征小图预测分割小图，之后直接升采样为大图。(根据步长和卷积核的大小决定，公式在上面已经给出)。</p>
+<p>对于FCN-16s，先对conv7预测的分割小图进行一次2x的操作，增加一个卷积核就可以实现。此时与pool4的输出大小是一样的，然后将pool4的输出从特征图预测分割图，然后与上面的2x操作后的分割图融合（可以简单的理解为相加），结果进行16x upsampled prediction，与FCN-32s一样，也是增加一个卷积层，卷积后的大小为输入图像的16(2^4)倍，也就是原图大小。</p>
+<p>对于FCN-8s同理。</p>
+<p>较浅层的预测结果包含了更多细节信息。比较2,3,4阶段可以看出，跳级结构利用浅层信息辅助逐步升采样，有更精细的结果。 </p>
+<p><center> <img src="/images/FCN/11.png" alt="Alt text"></center></p>
+<h4 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h4><p><strong>第1阶段</strong></p>
+<p><center> <img src="/images/FCN/12.png" alt="Alt text"></center></p>
+<p>以经典的分类网络为初始化。最后两级是全连接（红色），参数弃去不用。</p>
+<p><strong>第2阶段</strong></p>
+<p><center> <img src="/images/FCN/13.png" alt="Alt text"></center></p>
+<p>从特征小图（16<em>16</em>4096）预测分割小图（16<em>16</em>21），之后直接升采样为大图。<br>反卷积（橙色）的步长为32，这个网络称为FCN-32s。<br>这一阶段使用单GPU训练约需3天。</p>
+<p><strong>第3阶段</strong></p>
+<p><center> <img src="/images/FCN/14.png" alt="Alt text"></center></p>
+<p>升采样分为两次完成（橙色×2）。<br>在第二次升采样前，把第4个pooling层（绿色）的预测结果（蓝色）融合进来。使用跳级结构提升精确性。<br>第二次反卷积步长为16，这个网络称为FCN-16s。<br>这一阶段使用单GPU训练约需1天。</p>
+<p><strong>第4阶段</strong></p>
+<p><center> <img src="/images/FCN/15.png" alt="Alt text"></center></p>
+<p>升采样分为三次完成（橙色×3）。<br>进一步融合了第3个pooling层的预测结果。<br>第三次反卷积步长为8，记为FCN-8s。<br>这一阶段使用单GPU训练约需1天。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>发展到现在，基于深度学习的图像语义分割“通用框架已经确定”：前端 FCN（包含基于此的改进 SegNet、DeconvNet、DeepLab）+ 后端 CRF/MRF （条件随机场/马尔科夫随机场）优化。后面会继续探讨。</p>
+<p>事实上，FCN有一些短处，例如使用了较浅层的特征，因为fuse操作会加上较上层的pool特征值，导致高维特征不能很好得以使用，同时也因为使用较上层的pool特征值，导致FCN对图像大小变化有所要求，如果测试集的图像远大于或小于训练集的图像，FCN的效果就会变差。但是，也由于FCN提出了一种新的语义分割的方法，才使得有后面韩国Hyeonwoo Noh的对称反卷积网络，剑桥的SegNet等优秀用于语义分割的CNN网络。</p>
+<p>第2阶段</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="John Heb 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="John Heb 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/图像分割/" rel="tag"># 图像分割</a>
+          
+            <a href="/tags/FCN/" rel="tag"># FCN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/06/RCNN学习笔记/" rel="next" title="RCNN学习笔记">
+                <i class="fa fa-chevron-left"></i> RCNN学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="John Heb" />
+            
+              <p class="site-author-name" itemprop="name">John Heb</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FCN学习笔记"><span class="nav-number">1.</span> <span class="nav-text">FCN学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#从图像分类到图像分割"><span class="nav-number">1.1.</span> <span class="nav-text">从图像分类到图像分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反卷积的理解"><span class="nav-number">1.2.</span> <span class="nav-text">反卷积的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FCN详解"><span class="nav-number">1.3.</span> <span class="nav-text">FCN详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全连接层和卷积层的转化"><span class="nav-number">1.3.1.</span> <span class="nav-text">全连接层和卷积层的转化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络结构"><span class="nav-number">1.3.2.</span> <span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳跃结构（Skip-Architecture）"><span class="nav-number">1.3.3.</span> <span class="nav-text">跳跃结构（Skip Architecture）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#训练过程"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">训练过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">1.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Heb</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> Views
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'aliciabbb',
+            repo: 'gitment-comment# MUST HAVE, The repo you use to store Gitment comments',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '68e9dc4b6035c5b9c6f594248ebeefb5bef1dbdb',
+            
+                client_id: '404f156cc099a34e63a6'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

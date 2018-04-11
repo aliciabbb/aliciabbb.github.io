@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
 <meta property="og:description" content="C++中set的用法set的特性是，所有元素都会根据元素的键值自动排序，set的元素不像map那样可以同时拥有实值(value)和键值(key),set元素的键值就是实值，实值就是键值。set不允许两个元素有相同的键值。 set的各成员函数列表如下:  begin()—返回指向第一个元素的迭代器 clear()—清除所有元素 count()—返回某个值元素的个数 empty()—如果集合为空，返回">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T03:12:18.230Z">
+<meta property="og:updated_time" content="2018-04-11T03:21:00.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中set的用法">
 <meta name="twitter:description" content="C++中set的用法set的特性是，所有元素都会根据元素的键值自动排序，set的元素不像map那样可以同时拥有实值(value)和键值(key),set元素的键值就是实值，实值就是键值。set不允许两个元素有相同的键值。 set的各成员函数列表如下:  begin()—返回指向第一个元素的迭代器 clear()—清除所有元素 count()—返回某个值元素的个数 empty()—如果集合为空，返回">
@@ -380,8 +380,12 @@
 <li>upper_bound()—返回大于某个值元素的迭代器</li>
 <li>value_comp()—返回一个用于比较元素间的值的函数</li>
 </ol>
-<h1 id="include"><a href="#include" class="headerlink" title="include"></a>include<set></set></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include"></a>include<iostream></iostream></h1><p><code>using namespace std;</code><br><code>int main()</code><br><code>{</code><br>    int i;<br>    int arr[5] = {0,1,2,3,4};<br>    set<int> iset(arr,arr+5);</int></p>
-<pre><code>iset.insert(5);
+<p><code>include&lt;set&gt;</code><br><code>include&lt;iostream&gt;</code><br><code>using namespace std;</code><br><code>int main()</code><br><code>{</code></p>
+<pre><code>int i;
+int arr[5] = {0,1,2,3,4};
+set&lt;int&gt; iset(arr,arr+5);
+
+iset.insert(5);`
 cout&lt;&lt;&quot;size:&quot;&lt;&lt;iset.size()&lt;&lt;endl;
 cout&lt;&lt;&quot;3 count = &quot;&lt;&lt;iset.count(3)&lt;&lt;endl;
 iset.erase(1);
@@ -612,7 +616,7 @@ if(ite1!=iset.end())
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-中set的用法"><span class="nav-number">1.</span> <span class="nav-text">C++中set的用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number">2.</span> <span class="nav-text">include</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-1"><span class="nav-number">3.</span> <span class="nav-text">include</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-中set的用法"><span class="nav-number">1.</span> <span class="nav-text">C++中set的用法</span></a></li></ol></div>
             
 
           </div>

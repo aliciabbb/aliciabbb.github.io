@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="深度学习,交叉熵," />
+  <meta name="keywords" content="caffe," />
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="logistic、softmax原理和交叉熵深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。  logistic回归（是非问题）中，y取0或者1； softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；  Logist">
-<meta name="keywords" content="深度学习,交叉熵">
+<meta name="description" content="Ubuntu16.04 Caffe 安装及踩坑电脑已经配置好cuda8.0和cudnnv5.1，anaconda2，opencv3.2.0。 如果还没有配置的可以参考： https://blog.csdn.net/yhaolpz/article/details/71375762 安装caffe首先在你要安装的路径下 clone ： git clone https://github.com/BVLC">
+<meta name="keywords" content="caffe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="logistic、softmax原理和交叉熵">
-<meta property="og:url" content="http://yoursite.com/2018/04/03/logistic、softmax原理和交叉熵/index.html">
+<meta property="og:title" content="Ubuntu16.04 Caffe 安装及踩坑">
+<meta property="og:url" content="http://yoursite.com/2018/04/12/Ubuntu16.04 Caffe 安装及踩坑/index.html">
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
-<meta property="og:description" content="logistic、softmax原理和交叉熵深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。  logistic回归（是非问题）中，y取0或者1； softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；  Logist">
+<meta property="og:description" content="Ubuntu16.04 Caffe 安装及踩坑电脑已经配置好cuda8.0和cudnnv5.1，anaconda2，opencv3.2.0。 如果还没有配置的可以参考： https://blog.csdn.net/yhaolpz/article/details/71375762 安装caffe首先在你要安装的路径下 clone ： git clone https://github.com/BVLC">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/nnet1/1.png">
-<meta property="og:image" content="http://yoursite.com/images/nnet1/2.png">
-<meta property="og:updated_time" content="2018-04-02T23:57:56.865Z">
+<meta property="og:updated_time" content="2018-04-12T02:18:19.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="logistic、softmax原理和交叉熵">
-<meta name="twitter:description" content="logistic、softmax原理和交叉熵深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。  logistic回归（是非问题）中，y取0或者1； softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；  Logist">
-<meta name="twitter:image" content="http://yoursite.com/images/nnet1/1.png">
+<meta name="twitter:title" content="Ubuntu16.04 Caffe 安装及踩坑">
+<meta name="twitter:description" content="Ubuntu16.04 Caffe 安装及踩坑电脑已经配置好cuda8.0和cudnnv5.1，anaconda2，opencv3.2.0。 如果还没有配置的可以参考： https://blog.csdn.net/yhaolpz/article/details/71375762 安装caffe首先在你要安装的路径下 clone ： git clone https://github.com/BVLC">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/03/logistic、softmax原理和交叉熵/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/12/Ubuntu16.04 Caffe 安装及踩坑/"/>
 
 
 
 
 
-  <title>logistic、softmax原理和交叉熵 | Stay Hungry Stay foolish</title>
+  <title>Ubuntu16.04 Caffe 安装及踩坑 | Stay Hungry Stay foolish</title>
   
 
 
@@ -256,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/logistic、softmax原理和交叉熵/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/12/Ubuntu16.04 Caffe 安装及踩坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Heb">
@@ -273,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">logistic、softmax原理和交叉熵</h1>
+          <h1 class="post-title" itemprop="name headline">Ubuntu16.04 Caffe 安装及踩坑</h1>
         
 
         <div class="post-meta">
@@ -285,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T14:18:20+08:00">
-                2018-04-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T10:17:16+08:00">
+                2018-04-12
               </time>
             
 
@@ -326,8 +323,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/03/logistic、softmax原理和交叉熵/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/03/logistic、softmax原理和交叉熵/" itemprop="commentsCount"></span>
+                <a href="/2018/04/12/Ubuntu16.04 Caffe 安装及踩坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/12/Ubuntu16.04 Caffe 安装及踩坑/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -360,23 +357,95 @@
       
 
       
-        <h1 id="logistic、softmax原理和交叉熵"><a href="#logistic、softmax原理和交叉熵" class="headerlink" title="logistic、softmax原理和交叉熵"></a>logistic、softmax原理和交叉熵</h1><p>深度学习中常用的两种回归模型为logistic和softmax，其中logistic主要是研究二分类观察结果，而softmax则可看作一种扩展，即针对多分类，比如mnist手写数据的识别。</p>
+        <h1 id="Ubuntu16-04-Caffe-安装及踩坑"><a href="#Ubuntu16-04-Caffe-安装及踩坑" class="headerlink" title="Ubuntu16.04 Caffe 安装及踩坑"></a>Ubuntu16.04 Caffe 安装及踩坑</h1><p>电脑已经配置好cuda8.0和cudnnv5.1，anaconda2，opencv3.2.0。</p>
+<p>如果还没有配置的可以参考：</p>
+<p><a href="https://blog.csdn.net/yhaolpz/article/details/71375762" target="_blank" rel="noopener">https://blog.csdn.net/yhaolpz/article/details/71375762</a></p>
+<h2 id="安装caffe"><a href="#安装caffe" class="headerlink" title="安装caffe"></a>安装caffe</h2><p><strong>首先</strong>在你要安装的路径下 clone ：</p>
+<p><code>git clone https://github.com/BVLC/caffe.git</code></p>
+<p>进入 caffe ，将 Makefile.config.example 文件复制一份并更名为 Makefile.config ，也可以在 caffe 目录下直接调用以下命令完成复制操作 ：</p>
+<p><code>sudo cp Makefile.config.example Makefile.config</code></p>
+<p>复制一份的原因是编译 caffe 时需要的是 Makefile.config 文件，而Makefile.config.example 只是caffe 给出的配置文件例子，不能用来编译 caffe。</p>
+<p>然后修改 Makefile.config 文件，在 caffe 目录下打开该文件：</p>
+<p>sudo gedit Makefile.config</p>
 <ul>
-<li>logistic回归（是非问题）中，y取0或者1；</li>
-<li>softmax回归（多分类问题）中，y取1,2…k中的一个表示类别标号的一个数（假设共有k类）；</li>
+<li><strong>修改 Makefile.config 文件内容：</strong></li>
 </ul>
-<h2 id="Logistic回归"><a href="#Logistic回归" class="headerlink" title="Logistic回归"></a>Logistic回归</h2><p>Logistic回归为概率型非线性回归模型，是研究二分类观察结果与一些影响因素之间关系的一种多变量分析方法。通常的问题是，研究某些因素条件下某个结果是否发生，比如医学中根据病人的一些症状来判断它是否患有某种病。</p>
-<p>在讲解Logistic回归理论之前，我们先从LR分类器说起。LR分类器，即Logistic Regression Classifier。在分类情形下，经过学习后的LR分类器是一组权值，当测试样本的数据输入时，这组权值与测试数据按照线性加和得到：</p>
-<p><center> <img src="/images/nnet1/1.png" alt="Alt text"></center></p>
-<p>这里x1,x2,···，xn是每个样本的个特征。之后将x代入sigmoid函数，即</p>
-<p><center> <img src="/images/nnet1/2.png" alt="Alt text"></center></p>
-<p>由于sigmoid函数的定义域为(-INF,INF)，值域为(0,1)，因此最基本的LR分类器适合对两类目标进行分类。而下面介绍的Logistic回归关键就在于如何求得w0,w1…,wn这组权值。整体思路就是用<strong>最大似然估计</strong>来做的。</p>
-<p>原文参考：<a href="https://blog.csdn.net/ariessurfer/article/details/41310525" target="_blank" rel="noopener">https://blog.csdn.net/ariessurfer/article/details/41310525</a></p>
-<h2 id="Softmax回归"><a href="#Softmax回归" class="headerlink" title="Softmax回归"></a>Softmax回归</h2><p>Softmax算法逻辑回归的扩展：<a href="https://blog.csdn.net/pi9nc/article/details/19336629" target="_blank" rel="noopener">https://blog.csdn.net/pi9nc/article/details/19336629</a></p>
-<h2 id="交叉熵的引入"><a href="#交叉熵的引入" class="headerlink" title="交叉熵的引入"></a>交叉熵的引入</h2><p>交叉熵代价函数的引入：<a href="https://blog.csdn.net/u012162613/article/details/44239919" target="_blank" rel="noopener">https://blog.csdn.net/u012162613/article/details/44239919</a><br>写得很好：<a href="https://blog.csdn.net/u014313009/article/details/51043064" target="_blank" rel="noopener">https://blog.csdn.net/u014313009/article/details/51043064</a></p>
-<h2 id="交叉熵的推导"><a href="#交叉熵的推导" class="headerlink" title="交叉熵的推导"></a>交叉熵的推导</h2><p>交叉熵的推导：<a href="https://blog.csdn.net/jasonzzj/article/details/52017438" target="_blank" rel="noopener">https://blog.csdn.net/jasonzzj/article/details/52017438</a></p>
-<h2 id="常用激活函数"><a href="#常用激活函数" class="headerlink" title="常用激活函数"></a>常用激活函数</h2><p><a href="https://blog.csdn.net/leo_xu06/article/details/53708647" target="_blank" rel="noopener">https://blog.csdn.net/leo_xu06/article/details/53708647</a></p>
-<p><a href="https://blog.csdn.net/kangyi411/article/details/78969642" target="_blank" rel="noopener">https://blog.csdn.net/kangyi411/article/details/78969642</a></p>
+<p><strong>1.应用 cudnn</strong></p>
+<p>将下面一句前面的井号注释去掉</p>
+<p><code>USE_CUDNN := 1</code></p>
+<p><strong>2.应用 opencv 版本</strong></p>
+<p>将注释去掉</p>
+<p><code>OPENCV_VERSION := 3</code></p>
+<p><strong>3.使用 python 接口</strong></p>
+<p>将注释去掉</p>
+<p><code>WITH_PYTHON_LAYER := 1</code></p>
+<p><strong>4.修改 python 路径</strong></p>
+<p><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</code><br><code>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</code> </p>
+<p>改为：</p>
+<p><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial</code><br><code>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial</code>  </p>
+<ul>
+<li><strong>修改 caffe 目录下的 Makefile 文件</strong></li>
+</ul>
+<p><code>NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)</code></p>
+<p>改为</p>
+<p><code>NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</code></p>
+<p><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5</code></p>
+<p>改为</p>
+<p><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial</code></p>
+<ul>
+<li><strong>修改 /usr/local/cuda/include/host_config.h</strong> </li>
+</ul>
+<p><code>井error-- unsupported GNU version! gcc versions later than 4.9 are not supported!</code></p>
+<p>改为</p>
+<p><code>//井error-- unsupported GNU version! gcc versions later than 4.9 are not supported!</code></p>
+<p><strong>注意：这里井代表井号</strong></p>
+<p>下面可以编译caffe了：</p>
+<p><code>make all -j8</code></p>
+<p>编译成功后可运行测试：</p>
+<p><code>sudo make runtest -j8</code></p>
+<p>不报错即成功！！！报错看下面错误总结！</p>
+<h2 id="安装-pycaffe-接口环境"><a href="#安装-pycaffe-接口环境" class="headerlink" title="安装 pycaffe 接口环境"></a>安装 pycaffe 接口环境</h2><p>在上一步成功安装 caffe 之后，就可以通过 caffe 去做训练数据集或者预测各种相关的事了，只不过需要在命令行下通过 caffe 命令进行操作，而这一步 pycaffe 的安装以及 notebook 环境配置只是为了更方便的去使用 caffe ，实际上大多数都是通过 python 来操作 caffe 的，而 notebook 使用浏览器作为界面，可以更方便的编写和执行 python 代码。</p>
+<p>首先编译 pycaffe :</p>
+<p><code>cd caffe</code></p>
+<p><code>sudo make pycaffe -j8</code></p>
+<p>编译 pycaffe 成功后，验证一下是否可以在 python 中导入 caffe 包，首先进入 python 环境：</p>
+<p><code>python</code></p>
+<p><code>import caffe</code></p>
+<p>不报错则成功！！！</p>
+<h2 id="踩坑总结"><a href="#踩坑总结" class="headerlink" title="踩坑总结"></a>踩坑总结</h2><ul>
+<li><strong>编译caffe runtest时出现：libcudart.so.8.0: cannot open shared object file: No such file or directory</strong></li>
+</ul>
+<p>问题描述：error while loading shared libraries: libcudart.so.8.0: cannot open shared object file: No such file or directory</p>
+<p>解决办法：首先确认/etc/profile中的路径包含了cuda8.0的安装路径及相应的库文件</p>
+<p><code>export PATH=$PATH:/usr/local/cuda-8.0/bin</code><br><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64</code><br><code>export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/cuda-8.0/lib64</code></p>
+<p><code>$source /etc/profile</code></p>
+<p>使配置文件生效，再次执行。</p>
+<p>若仍提示相同的错误，则执行以下命令，将相应的库文件复制到/usr/lib</p>
+<p><code>sudo cp /usr/local/cuda-8.0/lib64/libcudart.so.8.0 /usr/local/lib/libcudart.so.8.0 &amp;&amp; sudo ldconfig</code><br><code>sudo cp /usr/local/cuda-8.0/lib64/libcublas.so.8.0 /usr/local/lib/libcublas.so.8.0 &amp;&amp; sudo ldconfig</code><br><code>sudo cp /usr/local/cuda-8.0/lib64/libcurand.so.8.0 /usr/local/lib/libcurand.so.8.0 &amp;&amp; sudo ldconfig</code><br>ps. ldconfig命令是一个动态链接库管理命令，是为了让动态链接库为系统共享</p>
+<ul>
+<li><strong>“libcudnn.so.5 cannot open shared object file: No such file or directory”</strong></li>
+</ul>
+<p>跟上面方法类似，缺什么补什么</p>
+<p>直接简单粗暴;</p>
+<p><code>sudo cp /usr/local/cuda-8.0/lib64/libcudnn.so /usr/local/lib/libcudnn.so &amp;&amp; sudo ldconfig</code><br><code>sudo cp /usr/local/cuda-8.0/lib64/libcudnn.so.5 /usr/local/lib/libcudnn.so.5 &amp;&amp; sudo ldconfig</code><br><code>sudo cp /usr/local/cuda-8.0/lib64/libcudnn.so.5.1.5 /usr/local/lib/libcudnn.so.5.1.5 &amp;&amp; sudo ldconfig</code></p>
+<ul>
+<li><strong>ImportError: No module named caffe</strong></li>
+</ul>
+<p>基本思路是把caffe中的python导入到解释器中</p>
+<p><code>sudo echo export PYTHONPATH=&quot;~/caffe/python&quot; &gt;&gt; ~/.bashrc</code></p>
+<p><code>source ~/.bashrc</code></p>
+<p>或者</p>
+<p><code>$ cd ~</code><br><code>$ sudo gedit .bashrc</code></p>
+<p>添加：<br>export PYTHONPATH=”/home/用户名/caffe/python:$PYTHONPATH”<br>在进入python环境，import caffe</p>
+<ul>
+<li><strong>import caffe报错：ImportError:No module named google.protobuf.internal</strong> </li>
+</ul>
+<p><code>$ pip install protobuf</code><br><code>$ /home/just/anaconda2/bin/pip install protobuf</code></p>
+<ul>
+<li>有时鼠标会变成十字</li>
+</ul>
+<p>可ctrl+Alt+T</p>
+<p>然后 <code>sudo pkill Xorg</code></p>
 
       
     </div>
@@ -423,9 +492,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
-            <a href="/tags/交叉熵/" rel="tag"># 交叉熵</a>
+            <a href="/tags/caffe/" rel="tag"># caffe</a>
           
         </div>
       
@@ -438,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/28/构建交叉平台开发环境/" rel="next" title="构建交叉平台开发环境">
-                <i class="fa fa-chevron-left"></i> 构建交叉平台开发环境
+              <a href="/2018/04/10/H264基本原理/" rel="next" title="H264基本原理">
+                <i class="fa fa-chevron-left"></i> H264基本原理
               </a>
             
           </div>
@@ -447,10 +514,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/06/RCNN学习笔记/" rel="prev" title="RCNN学习笔记">
-                RCNN学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -593,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#logistic、softmax原理和交叉熵"><span class="nav-number">1.</span> <span class="nav-text">logistic、softmax原理和交叉熵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic回归"><span class="nav-number">1.1.</span> <span class="nav-text">Logistic回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax回归"><span class="nav-number">1.2.</span> <span class="nav-text">Softmax回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵的引入"><span class="nav-number">1.3.</span> <span class="nav-text">交叉熵的引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵的推导"><span class="nav-number">1.4.</span> <span class="nav-text">交叉熵的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用激活函数"><span class="nav-number">1.5.</span> <span class="nav-text">常用激活函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ubuntu16-04-Caffe-安装及踩坑"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu16.04 Caffe 安装及踩坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装caffe"><span class="nav-number">1.1.</span> <span class="nav-text">安装caffe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-pycaffe-接口环境"><span class="nav-number">1.2.</span> <span class="nav-text">安装 pycaffe 接口环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑总结"><span class="nav-number">1.3.</span> <span class="nav-text">踩坑总结</span></a></li></ol></li></ol></div>
             
 
           </div>

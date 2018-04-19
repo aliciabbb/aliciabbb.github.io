@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux,gcc," />
+  <meta name="keywords" content="linux,树莓派,交叉编译," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="Linux学习之gccgcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。 语法 gcc(选项)(参数) 选项 -o：指定生成的输出文件；-E：仅执行编译预处理；-S：将C代码转换为汇编代码；-wall">
-<meta name="keywords" content="Linux,gcc">
+<meta name="description" content="构建嵌入式Linux内核主要内容：  首先用默认配置重新编译一遍内核，将新的内核替换现有内核，检查是否行得通 构建一个较小的Linux内核，内核版本选择现已安装到开发板的内核版本 选择默认配置中不少于15个kernel feature进行裁剪，解释移除(偶尔或增加)的理由 保留必要的模块安装， 剩余(占多数)取消 make后将新的内核安装到开发板运行测试 比较裁剪前后内核镜像文件大小的改变 选择1">
+<meta name="keywords" content="linux,树莓派,交叉编译">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux学习之gcc">
-<meta property="og:url" content="http://yoursite.com/2018/03/11/Linux学习之gcc/index.html">
+<meta property="og:title" content="构建嵌入式Linux内核">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/构建嵌入式Linux内核/index.html">
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
-<meta property="og:description" content="Linux学习之gccgcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。 语法 gcc(选项)(参数) 选项 -o：指定生成的输出文件；-E：仅执行编译预处理；-S：将C代码转换为汇编代码；-wall">
+<meta property="og:description" content="构建嵌入式Linux内核主要内容：  首先用默认配置重新编译一遍内核，将新的内核替换现有内核，检查是否行得通 构建一个较小的Linux内核，内核版本选择现已安装到开发板的内核版本 选择默认配置中不少于15个kernel feature进行裁剪，解释移除(偶尔或增加)的理由 保留必要的模块安装， 剩余(占多数)取消 make后将新的内核安装到开发板运行测试 比较裁剪前后内核镜像文件大小的改变 选择1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-11T05:07:58.563Z">
+<meta property="og:image" content="http://yoursite.com/images/kernel/1.png">
+<meta property="og:updated_time" content="2018-04-19T22:05:19.525Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux学习之gcc">
-<meta name="twitter:description" content="Linux学习之gccgcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。 语法 gcc(选项)(参数) 选项 -o：指定生成的输出文件；-E：仅执行编译预处理；-S：将C代码转换为汇编代码；-wall">
+<meta name="twitter:title" content="构建嵌入式Linux内核">
+<meta name="twitter:description" content="构建嵌入式Linux内核主要内容：  首先用默认配置重新编译一遍内核，将新的内核替换现有内核，检查是否行得通 构建一个较小的Linux内核，内核版本选择现已安装到开发板的内核版本 选择默认配置中不少于15个kernel feature进行裁剪，解释移除(偶尔或增加)的理由 保留必要的模块安装， 剩余(占多数)取消 make后将新的内核安装到开发板运行测试 比较裁剪前后内核镜像文件大小的改变 选择1">
+<meta name="twitter:image" content="http://yoursite.com/images/kernel/1.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/11/Linux学习之gcc/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/20/构建嵌入式Linux内核/"/>
 
 
 
 
 
-  <title>Linux学习之gcc | Stay Hungry Stay foolish</title>
+  <title>构建嵌入式Linux内核 | Stay Hungry Stay foolish</title>
   
 
 
@@ -253,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/11/Linux学习之gcc/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/20/构建嵌入式Linux内核/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Heb">
@@ -270,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux学习之gcc</h1>
+          <h1 class="post-title" itemprop="name headline">构建嵌入式Linux内核</h1>
         
 
         <div class="post-meta">
@@ -282,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-11T21:06:16+08:00">
-                2018-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T14:05:20+08:00">
+                2018-04-20
               </time>
             
 
@@ -323,8 +325,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/11/Linux学习之gcc/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/11/Linux学习之gcc/" itemprop="commentsCount"></span>
+                <a href="/2018/04/20/构建嵌入式Linux内核/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/20/构建嵌入式Linux内核/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -357,37 +359,44 @@
       
 
       
-        <h1 id="Linux学习之gcc"><a href="#Linux学习之gcc" class="headerlink" title="Linux学习之gcc"></a>Linux学习之gcc</h1><p>gcc命令使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。</p>
-<p><em>语法</em></p>
-<p><code>gcc(选项)(参数)</code></p>
-<p><em>选项</em></p>
-<p><code>-o：指定生成的输出文件；</code><br><code>-E：仅执行编译预处理；</code><br><code>-S：将C代码转换为汇编代码；</code><br><code>-wall：显示警告信息；</code><br><code>-c：仅执行编译操作，不进行连接操作。</code></p>
-<p><em>参数</em></p>
-<p>C源文件：指定C语言源代码文件。</p>
-<p><em>例子</em></p>
-<p>假设源程序文件名为test.c</p>
-<p><strong>无选项编译链接</strong></p>
-<p><code>gcc test.c</code></p>
-<p>将test.c预处理、汇编、编译并链接形成可执行文件。这里未指定输出文件，默认输出为a.out。</p>
-<p><strong>选项 -o</strong></p>
-<p><code>gcc test.c -o test</code><br>将test.c预处理、汇编、编译并链接形成可执行文件test。-o选项用来指定输出文件的文件名。</p>
-<p><strong>选项 -E</strong></p>
-<p><code>gcc -E test.c -o test.i</code><br>将test.c预处理输出test.i文件。</p>
-<p><strong>选项 -S</strong></p>
-<p><code>gcc -S test.i</code><br>将预处理输出文件test.i汇编成test.s文件。</p>
-<p><strong>选项 -c</strong></p>
-<p><code>gcc -c test.s</code><br>将汇编输出文件test.s编译输出test.o文件。</p>
-<p><strong>无选项链接</strong></p>
-<p>gcc test.o -o test<br>将编译输出文件test.o链接成最终可执行文件test。</p>
-<p><strong>选项 -O</strong></p>
-<p><code>gcc -O1 test.c -o test</code><br>使用编译优化级别1编译程序。级别为1~3，级别越大优化效果越好，但编译时间越长。</p>
-<p><strong>多源文件的编译方法</strong></p>
-<p>如果有多个源文件，基本上有两种编译方法：</p>
-<p>假设有两个源文件为test.c和testfun.c</p>
-<p><strong>多个文件一起编译</strong></p>
-<p><code>gcc testfun.c test.c -o test</code><br>将testfun.c和test.c分别编译后链接成test可执行文件。</p>
-<p><strong>分别编译各个源文件，之后对编译后输出的目标文件链接。</strong></p>
-<p><code>gcc -c testfun.c    #将testfun.c编译成testfun.o</code><br><code>gcc -c test.c       #将test.c编译成test.o</code><br><code>gcc -o testfun.o test.o -o test    #将testfun.o和test.o链接成test</code><br>以上两种方法相比较，第一中方法编译时需要所有文件重新编译，而第二种方法可以只重新编译修改的文件，未修改的文件不用重新编译。</p>
+        <h1 id="构建嵌入式Linux内核"><a href="#构建嵌入式Linux内核" class="headerlink" title="构建嵌入式Linux内核"></a>构建嵌入式Linux内核</h1><p>主要内容：</p>
+<ul>
+<li>首先用默认配置重新编译一遍内核，将新的内核替换现有内核，检查是否行得通</li>
+<li>构建一个较小的Linux内核，内核版本选择现已安装到开发板的内核版本</li>
+<li>选择默认配置中不少于15个kernel feature进行裁剪，解释移除(偶尔或增加)的理由</li>
+<li>保留必要的模块安装， 剩余(占多数)取消</li>
+<li>make后将新的内核安装到开发板运行测试</li>
+<li>比较裁剪前后内核镜像文件大小的改变</li>
+<li>选择1个模块加载与卸载，检查是否加载、 卸载成功</li>
+</ul>
+<p>硬件环境：树莓派3</p>
+<p>官网提供了两种方式对树莓派内核进行编译，一种是local building，一种是交叉编译，我们选择第二种。</p>
+<p>主要流程如下：</p>
+<p>1、安装交叉编译工具并配置环境变量，前面我写的交叉编译博客已经对这方面就行了比较详细描述，这里不再赘述。</p>
+<p><code>$ git clone https://github.com/raspberrypi/tools</code></p>
+<p>2、获取内核源码</p>
+<p><code>$ git clone --depth=1 https://github.com/raspberrypi/linux</code></p>
+<p>上面的指令获取的是最新的版本，如果想获取指定版本，可以参考下面的指令：</p>
+<p><code>$ git clone -b rpi-4.1.y --depth=1 git://github.com/raspberrypi/linux</code></p>
+<p>3、生成config并编译内核</p>
+<p><code>$ cd linux</code><br><code>$ KERNEL=kerne7</code><br><code>$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig</code></p>
+<p><code>$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs</code></p>
+<p>这里需要等较长的时间。</p>
+<p>4、挂载sd卡复制生成的内核文件</p>
+<p>首先<code>lsblk</code>，查看sd卡的标号</p>
+<p><center> <img src="/images/kernel/1.png" alt="Alt text"></center></p>
+<p>这里sd卡对应的分区为sdb1和sdb2（以下建议在linux目录下执行）</p>
+<p><code>$mkdir mnt</code></p>
+<p><code>$ mkdir mnt/fat32</code><br><code>$ mkdir mnt/ext4</code><br><code>$ sudo mount /dev/sdb1 mnt/fat32</code><br><code>$ sudo mount /dev/sdb2 mnt/ext4</code></p>
+<p>5、安装modules（执行的过程会提示有些指令找不到，一般不碍事）</p>
+<p><code>$ sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=mnt/ext4 modules_install</code></p>
+<p>6、复制新编译好的内核并移动到sd卡</p>
+<p><code>$ sudo cp mnt/fat32/\$KERNEL.img mnt/fat32/\$KERNEL-backup.img</code><br><code>$ sudo scripts/mkknlimg arch/arm/boot/zImage mnt/fat32/\$KERNEL.img</code><br><code>$ sudo cp arch/arm/boot/dts/*.dtb mnt/fat32/</code><br><code>$ sudo cp arch/arm/boot/dts/overlays/*.dtb* mnt/fat32/overlays/</code><br><code>$ sudo cp arch/arm/boot/dts/overlays/README mnt/fat32/overlays/</code><br><code>$ sudo umount mnt/fat32</code><br><code>$ sudo umount mnt/ext4</code></p>
+<p>7、将sd卡装入树莓派，连接屏幕启动，显示开机界面则表示成功，下面就是对内核裁剪，然后重新编译一遍，在走上面的流程。</p>
+<p>在linux目录下执行</p>
+<p><code>$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig</code></p>
+<p>出现选项菜单，然后根据自己的项目需要进行选择即可，最后save，重新编译。</p>
+<p>然后流程就和上面提到的编译后的流程一样。</p>
 
       
     </div>
@@ -434,9 +443,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
-            <a href="/tags/gcc/" rel="tag"># gcc</a>
+            <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
+          
+            <a href="/tags/交叉编译/" rel="tag"># 交叉编译</a>
           
         </div>
       
@@ -449,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/10/Ubuntu 文件文件夹查看权限和设置权限/" rel="next" title="Ubuntu 文件文件夹查看权限和设置权限">
-                <i class="fa fa-chevron-left"></i> Ubuntu 文件文件夹查看权限和设置权限
+              <a href="/2018/04/12/Ubuntu16.04 Caffe 安装及踩坑/" rel="next" title="Ubuntu16.04 Caffe 安装及踩坑">
+                <i class="fa fa-chevron-left"></i> Ubuntu16.04 Caffe 安装及踩坑
               </a>
             
           </div>
@@ -458,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/13/代码工程管理工具-make/" rel="prev" title="代码工程管理工具-make">
-                代码工程管理工具-make <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -604,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux学习之gcc"><span class="nav-number">1.</span> <span class="nav-text">Linux学习之gcc</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构建嵌入式Linux内核"><span class="nav-number">1.</span> <span class="nav-text">构建嵌入式Linux内核</span></a></li></ol></div>
             
 
           </div>

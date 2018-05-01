@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在树莓派上配置caffe-HRT 我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：deb">
+<meta name="description" content="我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：debian32位 参考链接： http">
 <meta name="keywords" content="树莓派,caffe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在树莓派上配置caffe-HRT">
 <meta property="og:url" content="http://yoursite.com/2018/05/01/在树莓派上配置caffe-HRT/index.html">
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
-<meta property="og:description" content="在树莓派上配置caffe-HRT 我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：deb">
+<meta property="og:description" content="我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：debian32位 参考链接： http">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-01T02:15:22.316Z">
+<meta property="og:updated_time" content="2018-05-01T02:20:20.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在树莓派上配置caffe-HRT">
-<meta name="twitter:description" content="在树莓派上配置caffe-HRT 我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：deb">
+<meta name="twitter:description" content="我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：debian32位 参考链接： http">
 
 
 
@@ -357,8 +357,7 @@
       
 
       
-        <p>在树莓派上配置caffe-HRT</p>
-<p>我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。</p>
+        <p>我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。</p>
 <p>板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派</p>
 <p>系统：debian32位</p>
 <p>参考链接：</p>
@@ -380,8 +379,7 @@
 <p><code>git clone https://github.com/OAID/Caffe-HRT.git</code></p>
 <p><strong>下载测试程序Gooletest</strong></p>
 <p><code>git clone https://github.com/google/googletest.git</code></p>
-<p>3、编译依赖包</p>
-<p><strong>编译OpenCV</strong></p>
+<h2 id="3、编译依赖包"><a href="#3、编译依赖包" class="headerlink" title="3、编译依赖包"></a>3、编译依赖包</h2><p><strong>编译OpenCV</strong></p>
 <p><code>cd ~/opencv-3.3.0</code><br><code>mkdir build</code><br><code>cd build</code><br><code>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local/AID/opencv3.3.0 ..</code><br><code>sudo make install</code><br><code>sudo ~/gen-pkg-config-pc.sh /usr/local/AID</code></p>
 <p><strong>编译ACL</strong></p>
 <p><code>cd ~/ComputeLibrary</code><br><code>mkdir build</code><br><code>arm-linux-gnueabihf-gcc opencl-1.2-stubs/opencl_stubs.c -Iinclude -shared -o build/libOpenCL.so</code><br><code>scons Werror=1 -j8 debug=0 neon=1 opencl=1 os=linux arch=armv7a build=native</code><br><code>wget ftp://ftp.openailab.net/tools/script/Computelibrary/Makefile</code><br><code>sudo make install</code><br><code>sudo ~/gen-pkg-config-pc.sh /usr/local/AID</code></p>
@@ -643,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、安装依赖项"><span class="nav-number">1.</span> <span class="nav-text">1、安装依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、下载相关依赖包"><span class="nav-number">2.</span> <span class="nav-text">2、下载相关依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、运行实例"><span class="nav-number">3.</span> <span class="nav-text">4、运行实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、其他事项"><span class="nav-number">4.</span> <span class="nav-text">5、其他事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、安装依赖项"><span class="nav-number">1.</span> <span class="nav-text">1、安装依赖项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、下载相关依赖包"><span class="nav-number">2.</span> <span class="nav-text">2、下载相关依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、编译依赖包"><span class="nav-number">3.</span> <span class="nav-text">3、编译依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、运行实例"><span class="nav-number">4.</span> <span class="nav-text">4、运行实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、其他事项"><span class="nav-number">5.</span> <span class="nav-text">5、其他事项</span></a></li></ol></div>
             
 
           </div>

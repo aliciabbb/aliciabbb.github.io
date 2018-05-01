@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
 <meta property="og:description" content="我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：debian32位 参考链接： http">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-01T02:20:20.268Z">
+<meta property="og:updated_time" content="2018-05-01T02:24:10.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在树莓派上配置caffe-HRT">
 <meta name="twitter:description" content="我们都知道一般caffe是安装在pc上的，但是如何把caffe配置到移动端呢？这里主要教大家如何把caffe装到一块树莓派上。caffe-HRT是由OPEN AI LAB维护的一个项目，它使用异构计算基础架构来加速caffe并提供实用工具来调试、配置和调整应用程序性能。 板子：基于ARMv7的华硕主板（tinker board），类似于工业级的树莓派 系统：debian32位 参考链接： http">
@@ -420,11 +420,11 @@
 <p>出现错误PoolingLayerTest/0.TestForwardMaxTopMask failed </p>
 <p>解决方法：对src/caffe/layers/acl_pooling_layer.cpp做如下修改即可</p>
 <p><code>bool ACLPoolingLayer::Bypass_acl(const vector&lt;Blob&gt;&amp; bottom,</code><br><code>const vector&lt;Blob&gt;&amp; top){</code><br><code>bool bypass_acl=false;</code></p>
-<p><code>\+bool use_top_mask = top.size() &gt; 1;</code><br><code>if (this-&gt;force_bypass_acl_path_|| this-&gt;layer_param_.pooling_param().global_pooling()) {</code><br><code>bypass_acl=true;</code><br><code>}</code></p>
+<p>+<code>bool use_top_mask = top.size() &gt; 1;</code><br><code>if (this-&gt;force_bypass_acl_path_|| this-&gt;layer_param_.pooling_param().global_pooling()) {</code><br><code>bypass_acl=true;</code><br><code>}</code></p>
 <p><code>if (this-&gt;kernel_h_!=2 &amp;&amp; this-&gt;kernel_h_!=3) {</code><br><code>bypass_acl=true;</code><br><code>}</code></p>
-<p><code>\+if (use_top_mask){</code></p>
-<p><code>\+bypass_acl=true;</code></p>
-<p><code>\+}</code><br><code>return bypass_acl;</code><br><code>}</code></p>
+<p>+<code>if (use_top_mask){</code></p>
+<p>+<code>bypass_acl=true;</code></p>
+<p>+<code>}</code><br><code>return bypass_acl;</code><br><code>}</code></p>
 <h2 id="5、其他事项"><a href="#5、其他事项" class="headerlink" title="5、其他事项"></a>5、其他事项</h2><p>ssh连接树莓派的时候出现</p>
 <p> WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @<br>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<br>IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!<br>Someone could be eavesdropping on you right now (man-in-the-middle attack)!<br>It is also possible that a host key has just been changed.<br>The fingerprint for the RSA key sent by the remote host is<br>07:36:8e:d0:72:88:38:f7:21:10:c3:12:d6:35:ad:55.<br>Please contact your system administrator.<br>Add correct host key in /Users/watsy/.ssh/known_hosts to get rid of this message.<br>Offending RSA key in /Users/watsy/.ssh/known_hosts:1<br>RSA host key for 192.168.2.108 has changed and you have requested strict checking.<br>Host key verification failed. </p>
 <p>是因为树莓派重新烧录了系统，而pc机上保留了以前的连接信息，运行下面指令即可</p>

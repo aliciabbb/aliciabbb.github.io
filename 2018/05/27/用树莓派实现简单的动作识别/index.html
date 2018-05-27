@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
 <meta property="og:description" content="用树莓派实现简单的动作识别设备及环境 树莓派3B 官方系统Raspbian（2017-04-10-raspbian-jessie） 官方树莓派摄像头模块 环境配置这里需要的环境是python2.7和opencv，其实在上一个实验（基于树莓派的人脸检测）的基础上，是不需要再安装额外的包的，可以直接用。如果是一个全新的树莓派系统，建议更新后安装下python-opencv即可。指令如下： sudo a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-27T07:59:33.724Z">
+<meta property="og:updated_time" content="2018-05-27T08:06:04.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用树莓派实现简单的动作识别">
 <meta name="twitter:description" content="用树莓派实现简单的动作识别设备及环境 树莓派3B 官方系统Raspbian（2017-04-10-raspbian-jessie） 官方树莓派摄像头模块 环境配置这里需要的环境是python2.7和opencv，其实在上一个实验（基于树莓派的人脸检测）的基础上，是不需要再安装额外的包的，可以直接用。如果是一个全新的树莓派系统，建议更新后安装下python-opencv即可。指令如下： sudo a">
@@ -377,10 +377,7 @@
 <p>那么如何获取到摄像头拍摄视频的每一帧的图像呢？这一步对我们后续的动作识别很重要。我们以这次动作识别的代码为例，首先在安装picamera后，导入相关模块</p>
 <p><code>import cv2</code><br><code>import numpy</code><br><code>import time</code><br><code>import random</code><br><code>import os</code><br><code>from picamera.array import PiRGBArray</code><br><code>from picamera import PiCamera</code></p>
 <p>初始化相机模块，设定帧数和图像大小等</p>
-<p><code>camera = PiCamera()</code></p>
-<p><code>camera.resolution = ( 640, 480 )</code></p>
-<p><code>camera.framerate = 60</code></p>
-<p><code>rawCapture = PiRGBArray( camera, size=( 640, 480 ) )</code></p>
+<p><code>camera = PiCamera()</code><br><code>camera.resolution = ( 640, 480 )</code><br><code>camera.framerate = 60</code><br><code>rawCapture = PiRGBArray( camera, size=( 640, 480 ) )</code></p>
 <p>然后调用capture_continuous实现图像的提取</p>
 <pre><code>for f in camera.capture_continuous( rawCapture, format=&quot;bgr&quot;, use_video_port=True ):
     image = f.array

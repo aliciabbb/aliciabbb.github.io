@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
 <meta property="og:description" content="用树莓派实现简单的动作识别设备及环境 树莓派3B 官方系统Raspbian（2017-04-10-raspbian-jessie） 官方树莓派摄像头模块 环境配置这里需要的环境是python2.7和opencv，其实在上一个实验（基于树莓派的人脸检测）的基础上，是不需要再安装额外的包的，可以直接用。如果是一个全新的树莓派系统，建议更新后安装下python-opencv即可。指令如下： sudo a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-27T07:50:25.039Z">
+<meta property="og:updated_time" content="2018-05-27T07:54:17.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用树莓派实现简单的动作识别">
 <meta name="twitter:description" content="用树莓派实现简单的动作识别设备及环境 树莓派3B 官方系统Raspbian（2017-04-10-raspbian-jessie） 官方树莓派摄像头模块 环境配置这里需要的环境是python2.7和opencv，其实在上一个实验（基于树莓派的人脸检测）的基础上，是不需要再安装额外的包的，可以直接用。如果是一个全新的树莓派系统，建议更新后安装下python-opencv即可。指令如下： sudo a">
@@ -489,12 +489,27 @@ else:
     return 2;    
 </code></pre><h2 id="常用函数整理"><a href="#常用函数整理" class="headerlink" title="常用函数整理"></a>常用函数整理</h2><p>导入相关模块<br><code>import picamera</code><br><code>from time import sleep</code><br>初始化<br><code>camera = picamera.PiCamera()</code><br>捕获图像<br><code>camera.capture(&#39;image.jpg&#39;)</code><br>打开预览<br><code>camera.start_preview()</code><br>垂直翻转<br><code>camera.vflip = True</code><br>水平翻转<br><code>camera.hflip = True</code><br>控制摄像头亮度<br><code>camera.brightness = 60</code><br>控制摄像头录像<br><code>camera.start_recording(&#39;video.h264&#39;)</code><br>程序休眠，但摄像头继续工作<br><code>sleep(5)</code><br>停止录像<br><code>camera.stop_recording()</code></p>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><code>import cv2</code><br><code>import numpy</code><br><code>import time</code><br><code>import random</code><br><code>import os</code><br><code>from picamera.array import PiRGBArray</code><br><code>from picamera import PiCamera</code></p>
-<p><code>def main():</code><br>    you_win = 0<br>    pc_win = 0<br>    print(“这是通过摄像头来玩的剪刀石头布的游戏，请输入回车开始游戏\n”)<br>    s = raw_input()<br>    while(1):<br>        print “比分(玩家：电脑) “,you_win,”:”,pc_win,’\n’<br>        s = raw_input()<br>        os.system(‘cls’)<br>        game()<br>        if(ans == 1):<br>            you_win+=1<br>        elif(ans == -1):<br>            pc_win+=1<br>        print “为了减少误判，请尽可能将手占据尽可能大的框框”</p>
-<p><code>def game():</code><br>    global ans<br>    you_win = 0<br>    pc_win = 0</p>
-<pre><code>fuck =[]
+<p><code>def main():</code><br>    <code>you_win = 0
+    pc_win = 0
+    print(&quot;这是通过摄像头来玩的剪刀石头布的游戏，请输入回车开始游戏\n&quot;)
+    s = raw_input()
+    while(1):
+        print &quot;比分(玩家：电脑) &quot;,you_win,&quot;:&quot;,pc_win,&#39;\n&#39;
+        s = raw_input()
+        os.system(&#39;cls&#39;)
+        game()
+        if(ans == 1):
+            you_win+=1
+        elif(ans == -1):
+            pc_win+=1
+        print &quot;为了减少误判，请尽可能将手占据尽可能大的框框&quot;</code></p>
+<p><code>def game():</code><br>    <code>global ans
+    you_win = 0
+    pc_win = 0</code></p>
+<pre><code>`fuck =[]
 fuck.append(&quot;石头&quot;)
 fuck.append(&quot;剪刀&quot;)
-fuck.append(&quot;布&quot;)
+fuck.append(&quot;布&quot;)`
 
 camera = PiCamera()
 camera.resolution = ( 640, 480 )

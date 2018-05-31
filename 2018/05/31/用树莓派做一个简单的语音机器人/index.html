@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="linux,树莓派,交叉编译," />
+  <meta name="keywords" content="树莓派,语音识别," />
 
 
 
@@ -79,28 +79,23 @@
 
 
 
-<meta name="description" content="构建交叉平台开发环境刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。 主要实现以下目标  充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。 能够建立主机与目标机之间传递数据的基本方法。 能够下载安装Linux及相关工具到目标机。 学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。  内容包括以下部分  针对所选">
-<meta name="keywords" content="linux,树莓派,交叉编译">
+<meta name="description" content="用树莓派做一个简单的语音机器人设备及环境 树莓派3B 官方系统Raspbian（2017-04-10-raspbian-jessie） 免驱动的麦克风 小音响（也可以用耳机代替） 前期准备在这个过程中，我们一共需要用到3个API，分别是百度语音里的语音识别和语音合成，还有图灵机器人。我们要分别注册账号，以便获取免费API的使用权。 1、注册百度云 注册百度云以便获得程序中需要用到的API Key和">
+<meta name="keywords" content="树莓派,语音识别">
 <meta property="og:type" content="article">
-<meta property="og:title" content="构建交叉平台开发环境">
-<meta property="og:url" content="http://yoursite.com/2018/03/28/构建交叉平台开发环境/index.html">
+<meta property="og:title" content="用树莓派实现简单的动作识别">
+<meta property="og:url" content="http://yoursite.com/2018/05/31/用树莓派做一个简单的语音机器人/index.html">
 <meta property="og:site_name" content="Stay Hungry Stay foolish">
-<meta property="og:description" content="构建交叉平台开发环境刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。 主要实现以下目标  充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。 能够建立主机与目标机之间传递数据的基本方法。 能够下载安装Linux及相关工具到目标机。 学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。  内容包括以下部分  针对所选">
+<meta property="og:description" content="用树莓派做一个简单的语音机器人设备及环境 树莓派3B 官方系统Raspbian（2017-04-10-raspbian-jessie） 免驱动的麦克风 小音响（也可以用耳机代替） 前期准备在这个过程中，我们一共需要用到3个API，分别是百度语音里的语音识别和语音合成，还有图灵机器人。我们要分别注册账号，以便获取免费API的使用权。 1、注册百度云 注册百度云以便获得程序中需要用到的API Key和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/pi1/11.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/7.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/8.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/9.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/6.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/2.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/10.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/5.png">
-<meta property="og:image" content="http://yoursite.com/images/pi1/4.png">
-<meta property="og:updated_time" content="2018-04-07T06:07:59.035Z">
+<meta property="og:image" content="http://yoursite.com/images/yuyin/1.png">
+<meta property="og:image" content="http://yoursite.com/images/yuyin/2.png">
+<meta property="og:image" content="http://yoursite.com/images/yuyin/3.png">
+<meta property="og:image" content="http://yoursite.com/images/yuyin/4.png">
+<meta property="og:updated_time" content="2018-05-31T13:31:06.301Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="构建交叉平台开发环境">
-<meta name="twitter:description" content="构建交叉平台开发环境刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。 主要实现以下目标  充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。 能够建立主机与目标机之间传递数据的基本方法。 能够下载安装Linux及相关工具到目标机。 学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。  内容包括以下部分  针对所选">
-<meta name="twitter:image" content="http://yoursite.com/images/pi1/11.png">
+<meta name="twitter:title" content="用树莓派实现简单的动作识别">
+<meta name="twitter:description" content="用树莓派做一个简单的语音机器人设备及环境 树莓派3B 官方系统Raspbian（2017-04-10-raspbian-jessie） 免驱动的麦克风 小音响（也可以用耳机代替） 前期准备在这个过程中，我们一共需要用到3个API，分别是百度语音里的语音识别和语音合成，还有图灵机器人。我们要分别注册账号，以便获取免费API的使用权。 1、注册百度云 注册百度云以便获得程序中需要用到的API Key和">
+<meta name="twitter:image" content="http://yoursite.com/images/yuyin/1.png">
 
 
 
@@ -130,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/28/构建交叉平台开发环境/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/31/用树莓派做一个简单的语音机器人/"/>
 
 
 
 
 
-  <title>构建交叉平台开发环境 | Stay Hungry Stay foolish</title>
+  <title>用树莓派实现简单的动作识别 | Stay Hungry Stay foolish</title>
   
 
 
@@ -263,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/构建交叉平台开发环境/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/用树莓派做一个简单的语音机器人/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Heb">
@@ -280,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">构建交叉平台开发环境</h1>
+          <h1 class="post-title" itemprop="name headline">用树莓派实现简单的动作识别</h1>
         
 
         <div class="post-meta">
@@ -292,8 +287,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T22:31:20+08:00">
-                2018-03-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T22:29:20+08:00">
+                2018-05-31
               </time>
             
 
@@ -315,8 +310,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux学习/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux学习</span>
+                  <a href="/categories/树莓派/" itemprop="url" rel="index">
+                    <span itemprop="name">树莓派</span>
                   </a>
                 </span>
 
@@ -333,8 +328,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/28/构建交叉平台开发环境/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/28/构建交叉平台开发环境/" itemprop="commentsCount"></span>
+                <a href="/2018/05/31/用树莓派做一个简单的语音机器人/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/31/用树莓派做一个简单的语音机器人/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -367,61 +362,162 @@
       
 
       
-        <h1 id="构建交叉平台开发环境"><a href="#构建交叉平台开发环境" class="headerlink" title="构建交叉平台开发环境"></a>构建交叉平台开发环境</h1><p>刚开始接触linux下构建交叉平台开发环境不久，硬件用的是华硕的一款树莓派板子，目前先做一个简单的总结。</p>
-<p><strong>主要实现以下目标</strong></p>
+        <h1 id="用树莓派做一个简单的语音机器人"><a href="#用树莓派做一个简单的语音机器人" class="headerlink" title="用树莓派做一个简单的语音机器人"></a>用树莓派做一个简单的语音机器人</h1><p><strong>设备及环境</strong></p>
+<p>树莓派3B</p>
+<p>官方系统Raspbian（2017-04-10-raspbian-jessie）</p>
+<p>免驱动的麦克风</p>
+<p>小音响（也可以用耳机代替）</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a><strong>前期准备</strong></h2><p>在这个过程中，我们一共需要用到3个API，分别是百度语音里的语音识别和语音合成，还有图灵机器人。我们要分别注册账号，以便获取免费API的使用权。</p>
+<p><strong>1、注册百度云</strong></p>
+<p>注册百度云以便获得程序中需要用到的API Key和Secret Key，下面是获取的方法：</p>
+<p>进入百度云的官网，注册后登陆，在主界面已开通的服务中选择百度语音</p>
+<p><center> <img src="/images/yuyin/1.png" alt="Alt text"></center></p>
+<p>然后点创建应用</p>
+<p><center> <img src="/images/yuyin/2.png" alt="Alt text"></center></p>
+<p>根据自己的需求按照提示完善信息</p>
+<p><center> <img src="/images/yuyin/3.png" alt="Alt text"></center></p>
+<p>最后点立即创建即可，然后会获得这些信息，后面需要用到</p>
+<p><center> <img src="/images/yuyin/4.png" alt="Alt text"></center></p>
+<p><strong>2、注册图灵机器人</strong></p>
+<p>进入官网<a href="http://www.tuling123.com，注册并登陆，点击创建机器人" target="_blank" rel="noopener">http://www.tuling123.com，注册并登陆，点击创建机器人</a></p>
+<p>图5</p>
+<p>从何获得apikey，这个后面也要用到</p>
+<p><strong>3、调整树莓派的音频输出</strong></p>
+<p>在终端执行</p>
+<p><code>sudo raspi-config</code></p>
+<p>然后选择7（Advanced Options ），然后选A4（Audio），进入选项后选择 Forece 3.5mm(‘headphone’) jack。确定然后保存退出重启系统。</p>
+<p><strong>4、安装播放器</strong></p>
+<p><code>sudo apt-get update</code></p>
+<p><code>sudo apt-get upgrade</code></p>
+<p><code>`sudo apt-get install mpg123</code></p>
+<p><code>sudo apt-get install omxplayer</code></p>
+<p><strong>5、麦克风测试</strong></p>
+<p><code>sudo arecord -D &quot;plughw:1,0&quot; -d 5 temp.wav</code></p>
+<p>-D 参数：选择设备， 外部设备是 plughw:1,0，内部设备是 plughw:0,0， 树莓派本身并没有录音模块，所以没有内部设备。<br>-d 5参数：录制时间为5 秒，如果不加这个参数就会一直录音，直到按下 ctrl+c 才会停止。<br>temp.wav 是生成的文件名字。<br>存储位置就是当前所在目录下，当录制完成后，可以使用 ls 查看当前目录下是否保存了这样一个音频文件。</p>
+<p><code>omxplayer -o local temp.wav</code></p>
+<p>音频开始播放，在播放完成后 ，自动退出</p>
+<p><strong>6、切换python版本</strong></p>
+<p>树莓派中原始默认使用的是python2.7的版本，代码中有些库是用到的python3版本，所以需要进行切换树莓派上的python版本。这里默认树莓派上已经有了python3.5（如果没有可以自行安装，很简单，这里不再赘述）。下面开始切换版本：</p>
 <ul>
-<li>充分了解开发板软硬件及编程环境，为进一步软件开发打下基础。</li>
-<li>能够建立主机与目标机之间传递数据的基本方法。</li>
-<li>能够下载安装Linux及相关工具到目标机。</li>
-<li>学会使用交叉平台编译器编译应用程序，并能够将可执行程序下载到目标机运行。</li>
+<li><p>开始之前拷贝是很有必要的，要形成备份的习惯</p>
+<p><code>sudo cp /usr/bin/python /usr/bin/python_copy</code></p>
+</li>
+<li><p>删除以前的这个2.7</p>
+<p><code>sudo rm /usr/bin/python</code></p>
+</li>
+<li><p>重新指定新的链接</p>
+</li>
 </ul>
-<p><strong>内容包括以下部分</strong></p>
+<p>​       <code>sudo cp /usr/bin/python3.5 /usr/bin/python</code></p>
+<p><strong>注意：有的情况python3.5文件在 /usr/local/bin/中，要根据自己的情况适当修改。</strong></p>
+<p>这里就完成的版本的切换，如果想切换回来，可以用同样的方法：</p>
 <ul>
-<li>针对所选择的目标平台(树莓派), 简要介绍其：执行环境（硬件环境）、运行环境（软件环境）和编程环境（编程工具）。</li>
-<li>下载安装Linux (bootloader、内核、模块、库、文件系统等) 到开发板。</li>
-<li>建立host-target连接 (常见SSH, VNC, Putty等)。</li>
-<li>构建并测试开发板交叉编译器。</li>
+<li><code>sudo rm /usr/bin/python</code></li>
+<li><code>sudo cp /usr/bin/python_copy /usr/bin/python</code></li>
 </ul>
-<h2 id="安装树莓派系统"><a href="#安装树莓派系统" class="headerlink" title="安装树莓派系统"></a>安装树莓派系统</h2><p>这一步比较简单，我是从华硕tinkerboard官网下载的系统，将下载的文件解压后，通过Win32diskimager软件将系统刻录至TF卡即可，注意路径不要搞错。最后将TF卡插入树莓派，连接显示屏开机。本板子的初试账户密码为：linaro</p>
-<h2 id="查看树莓派的IP地址"><a href="#查看树莓派的IP地址" class="headerlink" title="查看树莓派的IP地址"></a>查看树莓派的IP地址</h2><p>有两种方式可以和PC机相连，一种是网线的方式，另一种是无线的方式，值得注意的是，两种方法的IP地址不一样。</p>
-<p>1、树莓派连接显示屏开机后，执行sudo ifconfig命令，得到如下：</p>
-<p><center> <img src="/images/pi1/11.png" alt="Alt text"></center></p>
-<p>inet后面的即为无线的ip地址（不同的板子可能不一样）。</p>
-<p>2、通过网线查询板子的IP地址。将网线和PC端、树莓派端连接起来，然后点开右上角的网络连接。</p>
-<p><center> <img src="/images/pi1/7.png" alt="Alt text"></center></p>
-<p>点开编辑，对IPV4进行如下设置</p>
-<p><center> <img src="/images/pi1/8.png" alt="Alt text"></center></p>
-<p>通过右上角的网络信息，查看ipv4的IP地址</p>
-<p><center> <img src="/images/pi1/9.png" alt="Alt text"></center></p>
-<p>然后执行如下指令</p>
-<p><center> <img src="/images/pi1/6.png" alt="Alt text"></center></p>
-<p>10.42.0.98即为ip地址。</p>
-<h2 id="在Ubuntu下安装交叉编译工具"><a href="#在Ubuntu下安装交叉编译工具" class="headerlink" title="在Ubuntu下安装交叉编译工具"></a>在Ubuntu下安装交叉编译工具</h2><p>1、安装下载工具</p>
-<p><code>sudo apt-get install git</code><br><code>mkdir raspberrypi</code></p>
-<p>2、安装交叉编译工具</p>
-<p><code>cd raspberrypi</code><br><code>git clone git://github.com/raspberrypi/tools.git</code></p>
-<p>3、配置环境变量</p>
-<p>打开./bashrc文件<br> <code>sudo gedit ~/.bashrc</code><br>加入：<br><code>export PATH=$PATH:$HOME/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin</code></p>
-<p>如果是32位机，则去掉-x64。注意文件夹位置要对应，这里的tools安装在了raspberrypi文件夹里。</p>
-<p><code>source .bashrc</code><br>4、检测是否安装成功</p>
-<p><code>arm</code></p>
-<p><center> <img src="/images/pi1/2.png" alt="Alt text"></center></p>
-<p>不过建议用这个指令，’arm’有时抽风，我也不再清楚为什么。<br><code>arm-linux-gnueabihf-gcc -v</code><br>不报错则安装成功。</p>
-<h2 id="用交叉编译工具在ubuntu下编译写好的c文件"><a href="#用交叉编译工具在ubuntu下编译写好的c文件" class="headerlink" title="用交叉编译工具在ubuntu下编译写好的c文件"></a>用交叉编译工具在ubuntu下编译写好的c文件</h2><p>新建一个文件夹，pitest，然后在文件夹里面建一个pitest.c，将例程写到文件里。</p>
-<p><code>cd pitest</code></p>
-<p><code>arm-linux-gnueabihf-gcc pitest.c -o pitest -lm</code></p>
-<p>不报错，即可生成pitest.o文件，这个就是后面要在树莓派里运行的文件。</p>
-<h2 id="在ubuntu下通过SSH连接树莓派"><a href="#在ubuntu下通过SSH连接树莓派" class="headerlink" title="在ubuntu下通过SSH连接树莓派"></a>在ubuntu下通过SSH连接树莓派</h2><p>在上面步骤中，我们介绍了两种获取ip地址的方法，通过ssh和ip就可以和树莓派建立连接了。下面是在不接网线的情况下，接网线的情况换下IP即可。</p>
-<p><center> <img src="/images/pi1/10.png" alt="Alt text"></center></p>
-<h2 id="将ubuntu下编译好的文件传入到树莓派"><a href="#将ubuntu下编译好的文件传入到树莓派" class="headerlink" title="将ubuntu下编译好的文件传入到树莓派"></a>将ubuntu下编译好的文件传入到树莓派</h2><p>这里用到的是filezilla工具</p>
-<p><code>sudo apt-get  install filezilla</code></p>
-<p>安装完毕后打开，出现如下界面</p>
-<p><center> <img src="/images/pi1/5.png" alt="Alt text"></center></p>
-<p>上面对应输入自己的ip，用户名和密码即可快速连接。左边对应的是本地目录，右边对应的是树莓派的目录。</p>
-<p>上一步已经进入到了树莓派的终端，所以下一步可以建立一个文件夹，重启filezila，将编译好的两个文件上传到树莓派新建的文件夹里。</p>
-<p>最后在树莓派终端中，执行程序</p>
-<p><code>./pitest</code></p>
-<p><center> <img src="/images/pi1/4.png" alt="Alt text"></center></p>
+<h2 id="获取签名"><a href="#获取签名" class="headerlink" title="获取签名"></a>获取签名</h2><p>如果要调用百度语音API，还需要获得签名，需要使用创建应用所分配到的AppID、API Key及Secret Key，进行Access Token（用户身份验证和授权的凭证）的生成。</p>
+<p>下面是python代码获取方式：</p>
+<p><code>import urllib.request</code><br><code>import json</code><br><code>import base64</code><br><code>import sys</code></p>
+<p><code>def get_access_token():</code><br>    url = “<a href="https://openapi.baidu.com/oauth/2.0/token" target="_blank" rel="noopener">https://openapi.baidu.com/oauth/2.0/token</a>“<br>    grant_type = “client_credentials”<br>    client_id = “填写APIKey”<br>    client_secret = “填写Secret Key”</p>
+<pre><code>url = url + &quot;?&quot; + &quot;grant_type=&quot; + grant_type + &quot;&amp;&quot; + &quot;client_id=&quot; + client_id + &quot;&amp;&quot; + &quot;client_secret=&quot; + client_secret
+
+resp = urllib.request.urlopen(url).read()
+data = json.loads(resp.decode(&quot;utf-8&quot;))
+return data[&quot;access_token&quot;]
+</code></pre><p><code>get_access_token()</code></p>
+<p>Access Token的有效期为30天（以秒为单位），请集成时注意在程序中定期请求新的token。生成token后记得记下来，后面我们要用到。</p>
+<p>具体也可参考<a href="http://ai.baidu.com/docs/#/Begin/top" target="_blank" rel="noopener">http://ai.baidu.com/docs/#/Begin/top</a></p>
+<h2 id="python工程"><a href="#python工程" class="headerlink" title="python工程"></a>python工程</h2><p>要实现整个语音交互，首先就需要把需要识别的语音数据、语音信息、token等发送给百度的语音识别服务器，然后就能获取到对应的文字。</p>
+<p><code>import urllib.request</code><br><code>import json</code><br><code>import base64</code><br><code>import sys</code></p>
+<p><code>import urllib</code></p>
+<p><code>import requests</code></p>
+<p><code>def baidu_asr(data, id, token):</code><br>    <code>speech_data = base64.b64encode(data).decode(&quot;utf-8&quot;)</code><br>    <code>speech_length = len(data)</code></p>
+<pre><code>post_data = {
+        &quot;format&quot; : &quot;wav&quot;,
+        &quot;rate&quot; : 16000,
+        &quot;channel&quot; : 1,
+        &quot;cuid&quot; : id,
+        &quot;token&quot; : token,
+        &quot;speech&quot; : speech_data,
+        &quot;len&quot; : speech_length
+}
+
+url = &quot;http://vop.baidu.com/server_api&quot;
+json_data = json.dumps(post_data).encode(&quot;utf-8&quot;)
+json_length = len(json_data)
+#print(json_data)
+
+req = urllib.request.Request(url, data = json_data)
+req.add_header(&quot;Content-Type&quot;, &quot;application/json&quot;)
+req.add_header(&quot;Content-Length&quot;, json_length)
+
+print(&quot;asr start request\n&quot;)
+resp = urllib.request.urlopen(req)
+print(&quot;asr finish request\n&quot;)
+resp = resp.read()
+resp_data = json.loads(resp.decode(&quot;utf-8&quot;))
+if resp_data[&quot;err_no&quot;] == 0:
+    return resp_data[&quot;result&quot;]
+else:
+    print(resp_data)
+    return None
+</code></pre><p><code>def asr_main(filename):</code><br>    <code>f = open(filename, &quot;rb&quot;)</code><br>    <code>audio_data = f.read()</code><br>    <code>f.close()</code></p>
+<pre><code>#token = get_access_token()
+token = &quot;填写前面获取的token&quot;
+uuid = &quot;填写前面获取的AppID&quot;
+resp = baidu_asr(audio_data, uuid, token)
+print(resp[0])
+return resp[0]
+</code></pre><p>转换为相应的文字后，我们就需要考虑如何让树莓派实现对语音的回复，所以这里用到了图灵机器人，通过调用图灵机器人来实现树莓派的回复思考。</p>
+<p><code>def Tuling(words):</code></p>
+<pre><code>Tuling_API_KEY = &quot;填写前面获取的图灵机器人API_Key&quot;
+
+body = {&quot;key&quot;:Tuling_API_KEY,&quot;info&quot;:words.encode(&quot;utf-8&quot;)}
+
+url = &quot;http://www.tuling123.com/openapi/api&quot;
+r = requests.post(url,data=body,verify=True)
+
+if r:
+    date = json.loads(r.text)
+    print(date[&quot;text&quot;])
+    return date[&quot;text&quot;]
+else:
+    return None
+</code></pre><p>最后则需要把回复的文字转化为语音说出来，即用到了语音合成，详细设置可以参考<a href="http://yuyin.baidu.com/docs/tts/136" target="_blank" rel="noopener">http://yuyin.baidu.com/docs/tts/136</a> </p>
+<p><code>def baidu_tts_by_post(data, id, token):</code></p>
+<pre><code>post_data = {
+        &quot;tex&quot; : data,
+        &quot;lan&quot; : &quot;zh&quot;,
+        &quot;ctp&quot; : 1,
+        &quot;cuid&quot; : id,
+        &quot;tok&quot; : token,
+}
+
+url = &quot;http://tsn.baidu.com/text2audio&quot;
+post_data = urllib.parse.urlencode(post_data).encode(&#39;utf-8&#39;)
+#print(post_data)
+req = urllib.request.Request(url, data = post_data)
+
+print(&quot;tts start request&quot;)
+resp = urllib.request.urlopen(req)
+print(&quot;tts finish request&quot;)
+resp = resp.read()
+return resp
+</code></pre><p><code>def tts_main(filename, words):</code><br>    token = “同前面的token”</p>
+<pre><code>#token = get_access_token()
+text = urllib.parse.quote(words)
+uuid = &quot;11325809&quot;
+resp = baidu_tts_by_post(text, uuid, token)
+
+f = open(&quot;test.mp3&quot;, &quot;wb&quot;)
+f.write(resp)
+f.close()  
+</code></pre><p>最后整合到一起即可</p>
+<p><code>words = asr_main(&quot;test.wav&quot;)</code><br><code>new_words = Tuling(words)</code><br><code>tts_main(&quot;test.mp3&quot;, new_words)</code>   </p>
+<p>在写完这个python后，我们命名为main.py，然后写一个脚本如下：</p>
+<p><code>\#! /bin/bash</code></p>
+<p><code>arecord -D &quot;plughw:1&quot; -f S16_LE -r 16000 test.wav</code><br><code>python3 main.py</code><br><code>mpg123 test.mp3</code></p>
+<p>现在就可以跟机器人对话了，运行脚本，对着麦克风说话，按ctri+c结束，然后就可以等待机器人的回话了哦！</p>
 
       
     </div>
@@ -468,11 +564,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
             <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
           
-            <a href="/tags/交叉编译/" rel="tag"># 交叉编译</a>
+            <a href="/tags/语音识别/" rel="tag"># 语音识别</a>
           
         </div>
       
@@ -485,8 +579,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/13/代码工程管理工具-make/" rel="next" title="代码工程管理工具-make">
-                <i class="fa fa-chevron-left"></i> 代码工程管理工具-make
+              <a href="/2018/05/27/用树莓派实现简单的动作识别/" rel="next" title="用树莓派实现简单的动作识别">
+                <i class="fa fa-chevron-left"></i> 用树莓派实现简单的动作识别
               </a>
             
           </div>
@@ -494,10 +588,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/03/logistic、softmax原理和交叉熵/" rel="prev" title="logistic、softmax原理和交叉熵">
-                logistic、softmax原理和交叉熵 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -640,7 +730,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构建交叉平台开发环境"><span class="nav-number">1.</span> <span class="nav-text">构建交叉平台开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装树莓派系统"><span class="nav-number">1.1.</span> <span class="nav-text">安装树莓派系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看树莓派的IP地址"><span class="nav-number">1.2.</span> <span class="nav-text">查看树莓派的IP地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Ubuntu下安装交叉编译工具"><span class="nav-number">1.3.</span> <span class="nav-text">在Ubuntu下安装交叉编译工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用交叉编译工具在ubuntu下编译写好的c文件"><span class="nav-number">1.4.</span> <span class="nav-text">用交叉编译工具在ubuntu下编译写好的c文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在ubuntu下通过SSH连接树莓派"><span class="nav-number">1.5.</span> <span class="nav-text">在ubuntu下通过SSH连接树莓派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将ubuntu下编译好的文件传入到树莓派"><span class="nav-number">1.6.</span> <span class="nav-text">将ubuntu下编译好的文件传入到树莓派</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用树莓派做一个简单的语音机器人"><span class="nav-number">1.</span> <span class="nav-text">用树莓派做一个简单的语音机器人</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期准备"><span class="nav-number">1.1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取签名"><span class="nav-number">1.2.</span> <span class="nav-text">获取签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python工程"><span class="nav-number">1.3.</span> <span class="nav-text">python工程</span></a></li></ol></li></ol></div>
             
 
           </div>
